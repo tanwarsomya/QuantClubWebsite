@@ -1,157 +1,128 @@
 # KTH Quantitative Investment Club — Website
 
-The public website for the KTH Quantitative Investment Club. It presents our four teams (Research, Risk, Development, Marketing), tells visitors who we are, and links to our application form.
+The public website for the KTH Quantitative Investment Club. It introduces our four teams (Research, Risk, Development and Marketing), explains who we are and links to our application form.
 
-It is a plain static site: HTML, CSS and a little JavaScript. There is no framework, no build step and nothing to install.
+I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no framework, no build step and no dependencies. The visual style follows our recruitment posters: a black background, warm blurred colour and high-contrast serif type.
 
 ---
 
 ## Contents
 
 - [Project structure](#project-structure)
-- [Running it locally](#running-it-locally)
-- [How the page is built](#how-the-page-is-built)
-- [Common edits](#common-edits)
+- [Running locally](#running-locally)
+- [How it works](#how-it-works)
+- [Making changes](#making-changes)
 - [Design system](#design-system)
-- [Deploying](#deploying)
-- [To do](#to-do)
+- [Deployment](#deployment)
 
 ---
 
 ## Project structure
 
 ```
-Quant Club Website/
 ├── index.html      Page content and structure
-├── styles.css      All styling (colours, layout, responsive rules)
-├── script.js       Animated team visuals and small page behaviour
-├── assets/
-│   └── logo.svg    Club logo (also used as the browser tab icon)
-└── README.md       This file
+├── styles.css      Styling: colours, layout, responsive rules
+├── script.js       Animated team visuals and scroll behaviour
+└── assets/
+    └── logo.svg    Club logo, also used as the favicon
 ```
-
-The `.claude/` folder is local tooling for previewing the site. It is not part of the website and should not be uploaded.
 
 ---
 
-## Running it locally
+## Running locally
 
-**Quickest:** double-click `index.html` to open it in your browser.
-
-**With a local server** (closer to how it behaves online, and lets you open it on your phone over the same Wi-Fi):
+Open `index.html` in a browser, or serve the folder:
 
 ```bash
 python -m http.server 5173
 ```
 
-Run it from the project folder, then open http://localhost:5173. Stop it with `Ctrl+C`.
-
-You need an internet connection for the Google Fonts to load. Without one the page falls back to system fonts.
+Then visit http://localhost:5173.
 
 ---
 
-## How the page is built
+## How it works
 
-`index.html` is split into these sections, top to bottom:
+### Page sections
 
-| Section          | Element / id        | What it is                                                     |
-| ---------------- | ------------------- | -------------------------------------------------------------- |
-| Background       | `.aurora`, `.grain` | Blurred, slowly drifting colour blobs plus film grain, after our posters |
-| Navigation       | `header.nav`        | Links, centred logo, Join button, LinkedIn and email icons    |
-| Teams            | `#teams`            | Four full-height columns, one per team, each with an animated canvas |
-| About            | `#about`            | Logo, wordmark and a short description of the club            |
-| Recruitment      | `#recruitment`      | Poster-style "Recruitment Open" section with the Apply button |
-| Footer           | `#contact`          | Link columns and copyright                                     |
+| Section     | Selector            | Description                                                         |
+| ----------- | ------------------- | ------------------------------------------------------------------- |
+| Background  | `.aurora`, `.grain` | Blurred, slowly drifting colour blobs with a film-grain overlay     |
+| Navigation  | `header.nav`        | Links, centred logo, Join button, social icons                      |
+| Teams       | `#teams`            | Four full-height columns, each with its own animated canvas         |
+| About       | `#about`            | Logo, wordmark and club description                                 |
+| Recruitment | `#recruitment`      | Poster-style "Recruitment Open" section linking to the application form |
+| Footer      | `#contact`          | Link columns and copyright                                          |
 
-### Team animations (`script.js`)
+### Team animations
 
-Each team column is an `<article class="team" data-team="...">` containing a `<canvas>`. The script reads the `data-team` value and runs the matching drawing function:
+Each team column is an `<article class="team" data-team="...">` with a `<canvas>` inside. `script.js` looks up a drawing function by the `data-team` value:
 
-| `data-team`   | Function        | Visual                                                            |
-| ------------- | --------------- | ----------------------------------------------------------------- |
-| `research`    | `research()`    | Monte Carlo price paths fanning out from one starting point       |
-| `risk`        | `risk()`        | A return distribution building up, with the 95% VaR tail in red   |
-| `development` | `development()` | A grid of code characters that forms a "Q", with a scanning line  |
-| `marketing`   | `marketing()`   | Broadcast rays and expanding rings from a glowing centre          |
+| `data-team`   | Visual                                                          |
+| ------------- | --------------------------------------------------------------- |
+| `research`    | Monte Carlo price paths fanning out from a common origin        |
+| `risk`        | A return distribution filling in, with the 95% VaR tail in red  |
+| `development` | A grid of code glyphs forming a "Q", swept by a scan line       |
+| `marketing`   | Broadcast rays and expanding rings from a glowing centre        |
 
-Each function takes `(ctx, width, height)` and returns a `draw()` function that renders one frame. A single `requestAnimationFrame` loop calls `draw()` for every column that is currently on screen. Visitors who have reduced motion turned on in their system settings get a still image instead.
+Each function takes `(ctx, width, height)` and returns a `draw()` function for one frame. A single `requestAnimationFrame` loop draws only the columns that are on screen, which it tracks with an `IntersectionObserver`. Canvases are rebuilt on resize. Visitors with `prefers-reduced-motion` set see a static frame.
 
 ---
 
-## Common edits
+## Making changes
 
-### Change a link
+### Links
 
-All links are in `index.html`. Search the file for the old URL and replace it.
+All links are in `index.html`:
 
-| Link               | Where it appears                                              |
-| ------------------ | ------------------------------------------------------------- |
-| Application form   | Nav "Join" button, each team's "apply to …" link, "Apply now" button |
-| LinkedIn           | Nav icon and footer                                           |
-| Instagram          | Footer                                                        |
-| Email              | Nav icon and footer "Contact"                                 |
+| Link             | Used in                                                      |
+| ---------------- | ------------------------------------------------------------ |
+| Application form | Nav "Join", each team's "apply to …" link, "Apply now"       |
+| LinkedIn         | Nav icon, footer                                             |
+| Instagram        | Footer                                                       |
+| Email            | Nav icon, footer "Contact"                                   |
 
-### Edit a team's description
+### Team content
 
-Find the team's `<article class="team" data-team="...">` in `index.html` and edit the `<h2>` (name) and `<p>` (description).
+Each team's name and description are the `<h2>` and `<p>` inside its `<article class="team">`.
 
-### Add or remove a team
+### Adding or removing a team
 
-1. Copy or delete an `<article class="team">` block in the Teams section of `index.html`.
-2. In `styles.css`, change `grid-template-columns: repeat(4, 1fr)` under `.teams` to the new number of columns.
-3. For a new team, give it a new `data-team` value and add a drawing function with the same name to `makers` in `script.js`. Reusing an existing value also works.
-4. Update the team list in the Recruitment section and the footer.
+1. Add or remove an `<article class="team">` block in `index.html`.
+2. Update `grid-template-columns: repeat(4, 1fr)` on `.teams` in `styles.css`.
+3. For a new visual, add a drawing function to `makers` in `script.js`, keyed by the new `data-team` value.
+4. Update the team lists in the Recruitment section and the footer.
 
-### Replace the logo
+### Logo
 
-Overwrite `assets/logo.svg` with the new logo, keeping the same filename. It is used in the nav, the About section and the browser tab. An SVG with a transparent background and light-coloured artwork works best on the dark page. If the logo is a PNG, save it as `assets/logo.png` and update the three `logo.svg` references in `index.html`.
+Replace `assets/logo.svg`. The logo is used in the nav, the About section and as the favicon. Light artwork on a transparent background suits the dark page best.
 
 ---
 
 ## Design system
 
-All colours and fonts are defined once at the top of `styles.css` under `:root`. Change them there and they update everywhere.
+Colours and fonts are defined as custom properties on `:root` in `styles.css`.
 
-| Token        | Value     | Used for                              |
-| ------------ | --------- | ------------------------------------- |
-| `--bg`       | `#050505` | Page background                       |
-| `--ink`      | `#f4efe6` | Main text, buttons                    |
-| `--muted`    | `#a7a19a` | Secondary text                        |
-| `--ember`    | `#ff7a3d` | Research accent                       |
-| `--crimson`  | `#d9412b` | Risk accent                           |
-| `--teal`     | `#3fae8f` | Development accent                    |
-| `--amber`    | `#e9b35a` | Marketing accent, highlights          |
+| Token       | Value     | Use                          |
+| ----------- | --------- | ---------------------------- |
+| `--bg`      | `#050505` | Background                   |
+| `--ink`     | `#f4efe6` | Primary text, buttons        |
+| `--muted`   | `#a7a19a` | Secondary text               |
+| `--ember`   | `#ff7a3d` | Research accent              |
+| `--crimson` | `#d9412b` | Risk accent                  |
+| `--teal`    | `#3fae8f` | Development accent           |
+| `--amber`   | `#e9b35a` | Marketing accent, highlights |
 
-Fonts (from Google Fonts):
+Typefaces, all from Google Fonts:
 
-- **Cormorant Garamond:** headings, in capitals, to match the posters
+- **Cormorant Garamond:** headings
 - **Inter:** body text
-- **JetBrains Mono:** small labels and links
+- **JetBrains Mono:** labels and links
 
-The layout responds to screen size. It has four columns on desktop, two on tablets (under 900px) and one on phones (under 640px), where the nav links are hidden.
-
----
-
-## Deploying
-
-The site is static, so any static host works. Upload `index.html`, `styles.css`, `script.js` and the `assets/` folder.
-
-**Netlify Drop (fastest):** drag the project folder onto https://app.netlify.com/drop. To update the site, drag the folder in again.
-
-**GitHub Pages (recommended long-term):**
-
-1. Push this folder to a GitHub repository.
-2. In the repository, go to **Settings → Pages**, choose **Deploy from a branch**, select `main`, then **Save**.
-3. The site appears at `https://<username>.github.io/<repo-name>/` within a minute. Every push to `main` updates it.
-
-A custom domain (for example `kthqif.se`) can be connected in either host's settings.
+The layout has four columns on desktop, two below 900px and one below 640px.
 
 ---
 
-## To do
+## Deployment
 
-- [ ] Replace the placeholder logo with the official one
-- [ ] Add the real Instagram link
-- [ ] Add the real contact email (currently `contact@kthquant.se`)
-- [ ] Add the GitHub link once the organisation exists
-- [ ] Fill in or remove the Legal links (Notice, Privacy, Terms)
+The site is hosted with GitHub Pages from the `main` branch. Every push to `main` updates the live site.
