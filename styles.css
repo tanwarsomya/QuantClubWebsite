@@ -137,6 +137,14 @@ img { display: block; }
   inset: 0;
   width: 100%;
   height: 100%;
+  opacity: .55;
+  filter: saturate(.7);
+  transition: opacity .5s, filter .5s;
+}
+/* Still frame brightens while its animation plays (see script.js) */
+.team.is-playing .team-canvas { opacity: 1; filter: none; }
+@media (hover: none) {
+  .team { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 }
 .team-copy {
   position: relative;
