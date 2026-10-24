@@ -25,7 +25,8 @@ I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no f
 ├── script.js       Animated team visuals and scroll behaviour
 ├── teams/
 │   ├── development.html   Development team page
-│   └── research.html      Research team page
+│   ├── research.html      Research team page
+│   └── risk.html              Risk team page
 └── assets/
     └── logo.svg    Club logo, also used as the favicon
 ```
