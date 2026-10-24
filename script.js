@@ -19,15 +19,18 @@
     return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
   };
 
-  // Visual area sits above the text block in each column
-  const area = (w, h) => ({ cx: w / 2, cy: h * 0.42, r: Math.min(w * 0.4, h * 0.25) });
+  // Where a visual sits on its canvas: above the text in a home-page column,
+  // or centred when the canvas has data-fit="center" (team page hero)
+  const area = (w, h, fit) => fit === "center"
+    ? { cx: w / 2, cy: h / 2, r: Math.min(w, h) * 0.32 }
+    : { cx: w / 2, cy: h * 0.42, r: Math.min(w * 0.4, h * 0.25) };
 
   // ---------- Team visuals ----------
-  // Each takes (ctx, width, height) and returns a draw() that renders one frame.
+  // Each takes (ctx, width, height, fit) and returns a draw() that renders one frame.
 
   // RESEARCH: Monte Carlo price paths fanning out from a common origin
-  function research(ctx, w, h) {
-    const { cx, cy, r } = area(w, h);
+  function research(ctx, w, h, fit) {
+    const { cx, cy, r } = area(w, h, fit);
     const steps = 120, n = 34;
     let paths = [];
     const reset = () => {
@@ -64,8 +67,8 @@
   }
 
   // RISK: a return distribution building up, with the VaR tail highlighted
-  function risk(ctx, w, h) {
-    const { cx, cy, r } = area(w, h);
+  function risk(ctx, w, h, fit) {
+    const { cx, cy, r } = area(w, h, fit);
     const bins = 48, counts = new Array(bins).fill(0);
     const lo = -3.2, hi = 3.2, varCut = -1.645;
     let total = 0, ripple = 0;
@@ -105,8 +108,8 @@
   }
 
   // DEVELOPMENT: a grid of glyphs forming a "Q", flickering like a terminal
-  function development(ctx, w, h) {
-    const { cx, cy, r } = area(w, h);
+  function development(ctx, w, h, fit) {
+    const { cx, cy, r } = area(w, h, fit);
     const glyphs = "01{}<>=+*/#$%λΣ∂";
     const cell = 11, cols = Math.floor((r * 2.2) / cell), rows = cols;
     const ox = cx - (cols * cell) / 2, oy = cy - (rows * cell) / 2;
@@ -138,8 +141,8 @@
   }
 
   // MARKETING: signal broadcast — rays and expanding waves from a point
-  function marketing(ctx, w, h) {
-    const { cx, cy, r } = area(w, h);
+  function marketing(ctx, w, h, fit) {
+    const { cx, cy, r } = area(w, h, fit);
     const rays = 28;
     let t = 0;
     return () => {
@@ -175,7 +178,7 @@
   const WARMUP_FRAMES = 160;
   const scenes = [];
 
-  document.querySelectorAll(".team").forEach((el) => {
+  document.querySelectorAll("[data-team]").forEach((el) => {
     const canvas = el.querySelector("canvas");
     const ctx = canvas.getContext("2d");
     const scene = { el, canvas, ctx, draw: null, playing: false };
@@ -185,7 +188,7 @@
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      scene.draw = makers[el.dataset.team](ctx, width, height);
+      scene.draw = makers[el.dataset.team](ctx, width, height, canvas.dataset.fit);
       // Run ahead so the still frame shows a fully formed visual
       for (let i = 0; i < WARMUP_FRAMES; i++) scene.draw();
     };

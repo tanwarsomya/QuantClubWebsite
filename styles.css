@@ -142,9 +142,9 @@ img { display: block; }
   transition: opacity .5s, filter .5s;
 }
 /* Still frame brightens while its animation plays (see script.js) */
-.team.is-playing .team-canvas { opacity: 1; filter: none; }
+.is-playing .team-canvas { opacity: 1; filter: none; }
 @media (hover: none) {
-  .team { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  [data-team] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 }
 .team-copy {
   position: relative;
