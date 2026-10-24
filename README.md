@@ -114,7 +114,7 @@ To create a page for another team:
 
 1. Copy `teams/development.html` to `teams/<team>.html`.
 2. Change the title, text, `--accent` on `<body>` and `data-team` on `.tp-visual`.
-3. On `index.html`, turn that team's `<h2>` into a link, replace its empty `<span class="team-more">` with a "meet the team" link, and update the footer link. Do the same in the footer of each team page.
+3. On `index.html`, link the team's `<h2>`, its "meet the team" link, its Recruitment list item and its footer entry to the new page. Do the same in the footer of each team page.
 
 ### Adding or removing a team
 
