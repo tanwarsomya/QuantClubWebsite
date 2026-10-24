@@ -1,0 +1,121 @@
+/* =========================================================
+   home.css — loaded only by index.html
+   The four team columns, the About section and the team list
+   in the Recruitment section.
+   ========================================================= */
+
+/* ---------- Team columns ---------- */
+.teams {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  min-height: 100vh;
+  min-height: 100svh;
+}
+.team {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 24px 56px;
+  border-right: 1px solid var(--line);
+  overflow: hidden;
+}
+.team:last-child { border-right: none; }
+.team-copy {
+  position: relative;
+  text-align: center;
+  transition: transform .4s;
+}
+.team:hover .team-copy { transform: translateY(-6px); }
+.team h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(26px, 2.6vw, 38px);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.team h2 a:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.team p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 260px;
+  margin: 0 auto 16px;
+  min-height: 4.5em; /* same height in every column so the titles line up */
+}
+/* "meet the team" link to the team page */
+.team-more {
+  display: block;
+  width: fit-content;
+  min-height: 1.5em;
+  margin: 0 auto 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  opacity: .8;
+}
+.team-more:hover { opacity: 1; text-decoration: underline; }
+/* "apply to …" link; colour comes from --accent on the link */
+.team-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+.team-link:hover { text-decoration: underline; }
+
+/* ---------- About ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 140px 24px;
+}
+.about-mark { display: flex; align-items: center; gap: 20px; }
+.wordmark {
+  font-family: var(--serif);
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: .02em;
+}
+.about-text {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--soft);
+  text-align: justify;
+}
+
+/* ---------- Recruitment team list ---------- */
+.recruit-teams {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 36px;
+  margin: 44px 0 48px;
+  font-family: var(--serif);
+  font-size: 22px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.recruit-teams a { transition: color .2s; }
+.recruit-teams a:hover { color: var(--amber); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .teams { grid-template-columns: repeat(2, 1fr); }
+  .team { min-height: 60vh; border-bottom: 1px solid var(--line); }
+  .team:nth-child(2n) { border-right: none; }
+  .about { grid-template-columns: 1fr; gap: 36px; padding: 100px 24px; }
+}
+@media (max-width: 640px) {
+  .teams { grid-template-columns: 1fr; }
+  .team { min-height: 70vh; border-right: none; padding: 0 16px 44px; }
+  .about { padding-left: 16px; padding-right: 16px; }
+  .about-text { text-align: left; font-size: 16px; }
+  .wordmark { font-size: 28px; }
+  .recruit-teams { font-size: 18px; gap: 10px 24px; }
+}
