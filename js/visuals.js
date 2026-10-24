@@ -1,15 +1,14 @@
-// Generative visuals for each team column, drawn on canvas.
-(() => {
-  // ---------- Setup ----------
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.getElementById("year").textContent = new Date().getFullYear();
+/* =========================================================
+   visuals.js — the four team animations, drawn on <canvas>
+   Loaded before main.js, which mounts and plays them.
 
-  // ---------- Nav: darken on scroll ----------
-  const nav = document.querySelector(".nav");
-  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 20);
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
+   Each visual is a function (ctx, width, height, fit) that
+   sets up its state and returns a draw() function rendering
+   one frame. To add a team, write a new function here and add
+   it to the object returned at the bottom, keyed by the same
+   name used in the page's data-team attribute.
+   ========================================================= */
+window.TeamVisuals = (() => {
   // ---------- Helpers ----------
   // Box–Muller standard normal
   const randn = () => {
@@ -172,68 +171,6 @@
     };
   }
 
-  // ---------- Mount a visual on each team column ----------
-  // Keys must match the data-team attributes in index.html
-  const makers = { research, risk, development, marketing };
-  const WARMUP_FRAMES = 160;
-  const scenes = [];
-
-  document.querySelectorAll("[data-team]").forEach((el) => {
-    const canvas = el.querySelector("canvas");
-    const ctx = canvas.getContext("2d");
-    const scene = { el, canvas, ctx, draw: null, playing: false };
-    const setup = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const { width, height } = canvas.getBoundingClientRect();
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      scene.draw = makers[el.dataset.team](ctx, width, height, canvas.dataset.fit);
-      // Run ahead so the still frame shows a fully formed visual
-      for (let i = 0; i < WARMUP_FRAMES; i++) scene.draw();
-    };
-    scene.setup = setup;
-    setup();
-    scenes.push(scene);
-  });
-
-  // ---------- Animation loop ----------
-  // Columns show a still frame and only animate while hovered (or tapped on touch screens).
-  // The loop stops entirely when nothing is playing.
-  let rafId = null;
-  const loop = () => {
-    const active = scenes.filter((s) => s.playing);
-    active.forEach((s) => s.draw());
-    rafId = active.length ? requestAnimationFrame(loop) : null;
-  };
-  const setPlaying = (scene, on) => {
-    if (reduceMotion) return;
-    scene.playing = on;
-    scene.el.classList.toggle("is-playing", on);
-    if (on && rafId === null) rafId = requestAnimationFrame(loop);
-  };
-
-  const canHover = window.matchMedia("(hover: hover)").matches;
-  for (const s of scenes) {
-    if (canHover) {
-      s.el.addEventListener("mouseenter", () => setPlaying(s, true));
-      s.el.addEventListener("mouseleave", () => setPlaying(s, false));
-    } else {
-      // Touch: tapping a column plays it and pauses the others
-      s.el.addEventListener("click", (e) => {
-        if (e.target.closest("a")) return;
-        const on = !s.playing;
-        scenes.forEach((x) => setPlaying(x, x === s && on));
-      });
-    }
-    // Keyboard users get the animation when tabbing to the apply link
-    s.el.addEventListener("focusin", () => setPlaying(s, true));
-    s.el.addEventListener("focusout", () => setPlaying(s, false));
-  }
-
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => scenes.forEach((s) => s.setup()), 150);
-  });
+  // Keys must match the data-team attributes in the HTML
+  return { research, risk, development, marketing };
 })();
