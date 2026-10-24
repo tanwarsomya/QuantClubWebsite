@@ -288,6 +288,7 @@ img { display: block; }
   margin: 0 auto;
   padding: 120px 24px 60px;
 }
+.tp-hero > * { min-width: 0; }
 .tp-back {
   display: inline-block;
   font-family: var(--mono);
@@ -479,6 +480,7 @@ img { display: block; }
   .team { min-height: 70vh; border-right: none; padding: 0 16px 44px; }
   .about, .recruit, .footer, .tp-hero, .tp-section { padding-left: 16px; padding-right: 16px; }
   .tp-members { grid-template-columns: 1fr; }
+  .tp-title { font-size: 11vw; }
   .about-text { text-align: left; font-size: 16px; }
   .wordmark { font-size: 28px; }
   .footer-grid { grid-template-columns: repeat(2, 1fr); }
