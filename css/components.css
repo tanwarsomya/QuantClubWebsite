@@ -1,0 +1,168 @@
+/* =========================================================
+   components.css — loaded by every page, after base.css
+   Pieces shared by the home page and team pages:
+   navigation, buttons, team visuals, call-to-action, footer.
+   ========================================================= */
+
+/* ---------- Navigation ---------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  transition: background .3s, backdrop-filter .3s;
+}
+/* Added by js/main.js once the page is scrolled */
+.nav.scrolled {
+  background: rgba(5, 5, 5, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 24px;
+}
+.nav-links { display: flex; gap: 40px; font-size: 14px; font-weight: 500; }
+.nav-left { justify-content: flex-end; }
+.nav-right { justify-content: flex-start; }
+.nav-links a { opacity: .85; transition: opacity .2s; }
+.nav-links a:hover { opacity: 1; }
+.nav-logo img { width: 40px; height: 40px; transition: transform .4s; }
+.nav-logo:hover img { transform: rotate(-8deg) scale(1.05); }
+.nav-actions {
+  position: absolute;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.icon-link { display: inline-flex; opacity: .8; }
+.icon-link:hover { opacity: 1; }
+
+/* ---------- Buttons and labels ---------- */
+.btn-join {
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 999px;
+  transition: background .2s;
+}
+.btn-join:hover { background: var(--amber); }
+.btn-apply {
+  display: inline-block;
+  border: 1px solid var(--ink);
+  padding: 14px 34px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  transition: background .25s, color .25s;
+}
+.btn-apply:hover { background: var(--ink); color: var(--bg); }
+/* Small uppercase label above a big title */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 28px;
+}
+
+/* ---------- Team visuals (drawn by js/visuals.js) ---------- */
+/* Any element with data-team containing a .team-canvas gets a visual */
+.team-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .55;
+  filter: saturate(.7);
+  transition: opacity .5s, filter .5s;
+}
+/* The still frame brightens while its animation plays (class set by js/main.js) */
+.is-playing .team-canvas { opacity: 1; filter: none; }
+@media (hover: none) {
+  [data-team] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+}
+
+/* ---------- Call to action ("Recruitment Open" / "Join <team>") ---------- */
+.recruit {
+  position: relative;
+  text-align: center;
+  padding: 140px 24px 160px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.recruit-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(48px, 9vw, 120px);
+  line-height: .95;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+/* Four-point sparkles from the posters */
+.sparkle {
+  position: absolute;
+  width: 34px; height: 34px;
+  background: var(--ink);
+  clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
+  animation: twinkle 4s ease-in-out infinite;
+}
+.sparkle-a { top: 22%; right: 22%; }
+.sparkle-b { top: 30%; right: 19%; width: 16px; height: 16px; animation-delay: -1.3s; }
+.sparkle-c { bottom: 22%; left: 16%; width: 42px; height: 42px; animation-delay: -2.6s; }
+@keyframes twinkle {
+  0%, 100% { opacity: .9; transform: scale(1) rotate(0deg); }
+  50%      { opacity: .4; transform: scale(.75) rotate(20deg); }
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px 40px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.footer h3 { font-size: 13px; font-weight: 600; margin-bottom: 18px; }
+.footer li { margin-bottom: 12px; }
+.footer li a { font-size: 13px; color: var(--muted); transition: color .2s; }
+.footer li a:hover { color: var(--ink); }
+.copyright {
+  margin-top: 64px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .nav-actions .icon-link { display: none; }
+  .nav-links { gap: 24px; }
+  .nav-inner { gap: 24px; }
+}
+@media (max-width: 640px) {
+  .nav-inner { display: flex; justify-content: space-between; padding: 14px 16px; }
+  .nav-links { display: none; }
+  .nav-actions { position: static; }
+  .recruit, .footer { padding-left: 16px; padding-right: 16px; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sparkle { animation: none; }
+}

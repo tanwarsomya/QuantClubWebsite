@@ -1,0 +1,179 @@
+/* =========================================================
+   team-page.css — loaded only by the pages in teams/
+   Layout for an individual team page. Each page sets --accent
+   on <body> to its team colour, which tints these styles.
+   ========================================================= */
+
+/* ---------- Hero: title, summary and visual ---------- */
+.tp-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  max-width: 1100px;
+  min-height: 88vh;
+  margin: 0 auto;
+  padding: 120px 24px 60px;
+}
+.tp-hero > * { min-width: 0; }
+.tp-back {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 36px;
+  transition: color .2s;
+}
+.tp-back:hover { color: var(--ink); }
+.team-page .eyebrow { color: var(--accent); }
+.tp-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: .95;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.tp-lead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--soft);
+  max-width: 440px;
+  margin-bottom: 36px;
+}
+.tp-visual {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ---------- Sections ---------- */
+.tp-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  border-top: 1px solid var(--line);
+}
+.tp-heading {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(30px, 3.5vw, 44px);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.tp-text {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--soft);
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+
+/* ---------- Cards (focus areas, members, projects) ---------- */
+.tp-card, .tp-member, .tp-project {
+  background: rgba(244, 239, 230, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 24px;
+  transition: border-color .25s, transform .25s;
+}
+.tp-card:hover, .tp-member:hover, .tp-project:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.tp-card h3, .tp-member h3, .tp-project h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.tp-card p, .tp-project > p:not(.tp-status) {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ---------- What we do ---------- */
+.tp-focus {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ---------- Members ---------- */
+.tp-members {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.tp-member { text-align: center; }
+.tp-avatar {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  font-family: var(--serif);
+  font-size: 24px;
+  color: var(--accent);
+}
+.tp-role { font-size: 14px; color: var(--accent); margin-bottom: 4px; }
+.tp-meta { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+.tp-member-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  transition: color .2s;
+}
+.tp-member-link:hover { color: var(--ink); }
+
+/* ---------- Projects ---------- */
+.tp-projects {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.tp-project { display: flex; flex-direction: column; gap: 6px; }
+.tp-status {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.tp-status.is-ongoing { color: var(--accent); }
+.tp-status.is-ongoing::before { content: "● "; }
+.tp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 6px; }
+.tp-tags li {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+.tp-project .tp-member-link { margin-top: auto; padding-top: 8px; }
+
+/* ---------- Call to action ---------- */
+.tp-cta { margin-top: 40px; }
+.tp-cta .recruit-title { margin-bottom: 44px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .tp-hero { grid-template-columns: 1fr; min-height: 0; padding-top: 100px; }
+  .tp-visual { max-width: 420px; width: 100%; }
+  .tp-focus { grid-template-columns: 1fr; }
+  .tp-members { grid-template-columns: repeat(2, 1fr); }
+  .tp-projects { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .tp-hero, .tp-section { padding-left: 16px; padding-right: 16px; }
+  .tp-members { grid-template-columns: 1fr; }
+  .tp-title { font-size: 11vw; }
+}
