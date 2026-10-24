@@ -23,6 +23,10 @@ I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no f
 ├── index.html      Page content and structure
 ├── styles.css      Styling: colours, layout, responsive rules
 ├── script.js       Animated team visuals and scroll behaviour
+├── teams/
+│   ├── development.html   Development team page
+│   ├── research.html      Research team page
+│   └── risk.html              Risk team page
 └── assets/
     └── logo.svg    Club logo, also used as the favicon
 ```
@@ -65,7 +69,9 @@ Each team column is an `<article class="team" data-team="...">` with a `<canvas>
 | `development` | A grid of code glyphs forming a "Q", swept by a scan line       |
 | `marketing`   | Broadcast rays and expanding rings from a glowing centre        |
 
-Each function takes `(ctx, width, height)` and returns a `draw()` function for one frame. On load, every canvas is run ahead `WARMUP_FRAMES` frames and left as a dimmed still image.
+Visuals mount on any element with a `data-team` attribute that contains a `<canvas class="team-canvas">`, so team pages reuse them. A canvas with `data-fit="center"` centres its visual instead of placing it above the column text.
+
+Each function takes `(ctx, width, height, fit)` and returns a `draw()` function for one frame. On load, every canvas is run ahead `WARMUP_FRAMES` frames and left as a dimmed still image.
 
 An animation plays only while its column is hovered, or while its apply link has keyboard focus. On touch screens, tapping a column plays it and pauses the others. The playing column gets an `is-playing` class, which brightens the canvas. A single `requestAnimationFrame` loop draws the playing columns and stops entirely when none are playing. Canvases are rebuilt on resize. Visitors with `prefers-reduced-motion` set only ever see the still frames.
 
@@ -87,6 +93,27 @@ All links are in `index.html`:
 ### Team content
 
 Each team's name and description are the `<h2>` and `<p>` inside its `<article class="team">`.
+
+### Team pages
+
+Each team page lives in `teams/` and has these sections:
+
+| Section           | Selector              | Description                                          |
+| ----------------- | --------------------- | ---------------------------------------------------- |
+| Hero              | `.tp-hero`            | Team name, summary, apply button and the team visual |
+| What we do        | `.tp-focus`           | Description and focus-area cards                     |
+| Members           | `.tp-members`         | One `.tp-member` card per person                     |
+| Ongoing projects  | `.tp-projects`        | One `.tp-project` card per project                   |
+| Finished projects | `.tp-projects`        | One `.tp-project` card per project                   |
+| Call to action    | `.tp-cta`             | "Join" section linking to the application form       |
+
+To add a member or project, copy an existing card and edit its text. Ongoing projects use `class="tp-status is-ongoing"`. The page's accent colour comes from `--accent` on `<body>`.
+
+To create a page for another team:
+
+1. Copy `teams/development.html` to `teams/<team>.html`.
+2. Change the title, text, `--accent` on `<body>` and `data-team` on `.tp-visual`.
+3. On `index.html`, turn that team's `<h2>` into a link, replace its empty `<span class="team-more">` with a "meet the team" link, and update the footer link. Do the same in the footer of each team page.
 
 ### Adding or removing a team
 

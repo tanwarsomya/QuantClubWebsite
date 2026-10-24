@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risk Team — KTH Quantitative Investment Club</title>
+  <meta name="description" content="The Risk team monitors portfolio risk, limits and positions for the KTH Quantitative Investment Club.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+</head>
+<body class="team-page" style="--accent: var(--crimson)">
+  <!-- Poster-style blurred aurora background -->
+  <div class="aurora" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="blob blob-4"></span>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <nav class="nav-inner" aria-label="Main">
+      <ul class="nav-links nav-left">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#teams">Teams</a></li>
+      </ul>
+      <a class="nav-logo" href="../index.html" aria-label="KTH Quantitative Investment Club — home">
+        <img src="../assets/logo.svg" alt="" width="40" height="40">
+      </a>
+      <ul class="nav-links nav-right">
+        <li><a href="../index.html#recruitment">Recruitment</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn-join" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener">Join</a>
+        <a class="icon-link" href="https://www.linkedin.com/company/kthqif/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.78-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg>
+        </a>
+        <a class="icon-link" href="mailto:contact@kthquant.se" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero: team name with its animated visual (plays on hover) -->
+    <section class="tp-hero">
+      <div class="tp-hero-copy">
+        <a class="tp-back" href="../index.html#teams"><span aria-hidden="true">←</span> All teams</a>
+        <p class="eyebrow">Team</p>
+        <h1 class="tp-title">Risk</h1>
+        <p class="tp-lead">Monitoring portfolio risk, limits and positions.</p>
+        <a class="btn-apply" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener">Apply to Risk</a>
+      </div>
+      <div class="tp-visual" data-team="risk">
+        <canvas class="team-canvas" data-fit="center" aria-hidden="true"></canvas>
+      </div>
+    </section>
+
+    <!-- Description -->
+    <section class="tp-section" aria-labelledby="desc-title">
+      <h2 id="desc-title" class="tp-heading">What we do</h2>
+      <p class="tp-text">
+        The Risk team keeps the fund honest. We measure how much the portfolio could lose, set the limits every strategy must stay within, and track positions day to day so problems are caught before they grow.
+      </p>
+      <div class="tp-focus">
+        <article class="tp-card">
+          <h3>Portfolio risk</h3>
+          <p>Measuring exposure, volatility and Value at Risk across the whole portfolio.</p>
+        </article>
+        <article class="tp-card">
+          <h3>Limits</h3>
+          <p>Setting and enforcing position, drawdown and concentration limits for each strategy.</p>
+        </article>
+        <article class="tp-card">
+          <h3>Position monitoring</h3>
+          <p>Tracking positions and P&amp;L and reporting to the rest of the fund.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Members: copy a .tp-member block per person -->
+    <section class="tp-section" aria-labelledby="members-title">
+      <h2 id="members-title" class="tp-heading">Members</h2>
+      <ul class="tp-members">
+        <li class="tp-member">
+          <span class="tp-avatar" aria-hidden="true">TL</span>
+          <h3>Member Name</h3>
+          <p class="tp-role">Team Lead</p>
+          <p class="tp-meta">Programme · Year</p>
+          <a class="tp-member-link" href="#" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+        </li>
+        <li class="tp-member">
+          <span class="tp-avatar" aria-hidden="true">MN</span>
+          <h3>Member Name</h3>
+          <p class="tp-role">Risk Analyst</p>
+          <p class="tp-meta">Programme · Year</p>
+          <a class="tp-member-link" href="#" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+        </li>
+        <li class="tp-member">
+          <span class="tp-avatar" aria-hidden="true">MN</span>
+          <h3>Member Name</h3>
+          <p class="tp-role">Risk Analyst</p>
+          <p class="tp-meta">Programme · Year</p>
+          <a class="tp-member-link" href="#" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+        </li>
+        <li class="tp-member">
+          <span class="tp-avatar" aria-hidden="true">MN</span>
+          <h3>Member Name</h3>
+          <p class="tp-role">Risk Analyst</p>
+          <p class="tp-meta">Programme · Year</p>
+          <a class="tp-member-link" href="#" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Ongoing projects: copy a .tp-project block per project -->
+    <section class="tp-section" aria-labelledby="ongoing-title">
+      <h2 id="ongoing-title" class="tp-heading">Ongoing projects</h2>
+      <div class="tp-projects">
+        <article class="tp-project">
+          <p class="tp-status is-ongoing">In progress</p>
+          <h3>Project title</h3>
+          <p>A short description of the project: what it does, why it matters and who it helps.</p>
+          <ul class="tp-tags"><li>Tag</li><li>Tag</li></ul>
+        </article>
+        <article class="tp-project">
+          <p class="tp-status is-ongoing">In progress</p>
+          <h3>Project title</h3>
+          <p>A short description of the project: what it does, why it matters and who it helps.</p>
+          <ul class="tp-tags"><li>Tag</li><li>Tag</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Finished projects: copy a .tp-project block per project -->
+    <section class="tp-section" aria-labelledby="finished-title">
+      <h2 id="finished-title" class="tp-heading">Finished projects</h2>
+      <div class="tp-projects">
+        <article class="tp-project">
+          <p class="tp-status">Completed · Term Year</p>
+          <h3>Project title</h3>
+          <p>A short description of the project and what it achieved.</p>
+          <ul class="tp-tags"><li>Tag</li><li>Tag</li></ul>
+          <a class="tp-member-link" href="#">View project <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="recruit tp-cta">
+      <span class="sparkle sparkle-a" aria-hidden="true"></span>
+      <span class="sparkle sparkle-c" aria-hidden="true"></span>
+      <p class="eyebrow">Now accepting applications</p>
+      <h2 class="recruit-title">Join<br>Risk</h2>
+      <a class="btn-apply" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener">Apply now</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="https://www.linkedin.com/company/kthqif/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a></li>
+          <li><a href="mailto:contact@kthquant.se">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Teams</h3>
+        <ul>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="risk.html">Risk</a></li>
+          <li><a href="development.html">Development</a></li>
+          <li><a href="../index.html#teams">Marketing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Club</h3>
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#recruitment">Recruitment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Notice</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">KTH Quantitative Investment Club © <span id="year">2026</span></p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
