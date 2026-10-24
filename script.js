@@ -172,12 +172,13 @@
   // ---------- Mount a visual on each team column ----------
   // Keys must match the data-team attributes in index.html
   const makers = { research, risk, development, marketing };
+  const WARMUP_FRAMES = 160;
   const scenes = [];
 
   document.querySelectorAll(".team").forEach((el) => {
     const canvas = el.querySelector("canvas");
     const ctx = canvas.getContext("2d");
-    const scene = { el, canvas, ctx, draw: null, visible: true };
+    const scene = { el, canvas, ctx, draw: null, playing: false };
     const setup = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const { width, height } = canvas.getBoundingClientRect();
@@ -185,7 +186,8 @@
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       scene.draw = makers[el.dataset.team](ctx, width, height);
-      if (reduceMotion) for (let i = 0; i < 200; i++) scene.draw();
+      // Run ahead so the still frame shows a fully formed visual
+      for (let i = 0; i < WARMUP_FRAMES; i++) scene.draw();
     };
     scene.setup = setup;
     setup();
@@ -193,26 +195,42 @@
   });
 
   // ---------- Animation loop ----------
-  // Only animate columns that are on screen
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      const s = scenes.find((x) => x.el === e.target);
-      if (s) s.visible = e.isIntersecting;
+  // Columns show a still frame and only animate while hovered (or tapped on touch screens).
+  // The loop stops entirely when nothing is playing.
+  let rafId = null;
+  const loop = () => {
+    const active = scenes.filter((s) => s.playing);
+    active.forEach((s) => s.draw());
+    rafId = active.length ? requestAnimationFrame(loop) : null;
+  };
+  const setPlaying = (scene, on) => {
+    if (reduceMotion) return;
+    scene.playing = on;
+    scene.el.classList.toggle("is-playing", on);
+    if (on && rafId === null) rafId = requestAnimationFrame(loop);
+  };
+
+  const canHover = window.matchMedia("(hover: hover)").matches;
+  for (const s of scenes) {
+    if (canHover) {
+      s.el.addEventListener("mouseenter", () => setPlaying(s, true));
+      s.el.addEventListener("mouseleave", () => setPlaying(s, false));
+    } else {
+      // Touch: tapping a column plays it and pauses the others
+      s.el.addEventListener("click", (e) => {
+        if (e.target.closest("a")) return;
+        const on = !s.playing;
+        scenes.forEach((x) => setPlaying(x, x === s && on));
+      });
     }
-  });
-  scenes.forEach((s) => io.observe(s.el));
+    // Keyboard users get the animation when tabbing to the apply link
+    s.el.addEventListener("focusin", () => setPlaying(s, true));
+    s.el.addEventListener("focusout", () => setPlaying(s, false));
+  }
 
   let resizeTimer;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => scenes.forEach((s) => s.setup()), 150);
   });
-
-  if (!reduceMotion) {
-    const loop = () => {
-      for (const s of scenes) if (s.visible) s.draw();
-      requestAnimationFrame(loop);
-    };
-    requestAnimationFrame(loop);
-  }
 })();
