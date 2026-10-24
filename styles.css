@@ -248,6 +248,8 @@ img { display: block; }
   text-transform: uppercase;
   color: #d6d0c7;
 }
+.recruit-teams a { transition: color .2s; }
+.recruit-teams a:hover { color: var(--amber); }
 .btn-apply {
   display: inline-block;
   border: 1px solid var(--ink);
