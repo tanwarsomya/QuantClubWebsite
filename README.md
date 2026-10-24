@@ -65,7 +65,9 @@ Each team column is an `<article class="team" data-team="...">` with a `<canvas>
 | `development` | A grid of code glyphs forming a "Q", swept by a scan line       |
 | `marketing`   | Broadcast rays and expanding rings from a glowing centre        |
 
-Each function takes `(ctx, width, height)` and returns a `draw()` function for one frame. A single `requestAnimationFrame` loop draws only the columns that are on screen, which it tracks with an `IntersectionObserver`. Canvases are rebuilt on resize. Visitors with `prefers-reduced-motion` set see a static frame.
+Each function takes `(ctx, width, height)` and returns a `draw()` function for one frame. On load, every canvas is run ahead `WARMUP_FRAMES` frames and left as a dimmed still image.
+
+An animation plays only while its column is hovered, or while its apply link has keyboard focus. On touch screens, tapping a column plays it and pauses the others. The playing column gets an `is-playing` class, which brightens the canvas. A single `requestAnimationFrame` loop draws the playing columns and stops entirely when none are playing. Canvases are rebuilt on resize. Visitors with `prefers-reduced-motion` set only ever see the still frames.
 
 ---
 
