@@ -2,7 +2,7 @@
 
 The public website for the KTH Quantitative Investment Club. It introduces our four teams (Research, Risk, Development and Marketing), explains who we are and links to our application form.
 
-I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no framework, no build step and no dependencies. The visual style follows our recruitment posters: a black background, warm blurred colour and high-contrast serif type.
+I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no framework, no build step and no dependencies. The look is light and editorial: a warm white background, soft gold and red washes, gold and red accents and high-contrast serif type.
 
 ---
 
@@ -146,24 +146,26 @@ To remove a team, undo the same steps.
 
 ### Logo
 
-Replace `assets/logo.svg`. The logo is used in the nav, the About section and as the favicon. Light artwork on a transparent background suits the dark page best.
+Replace `assets/logo.svg`. The logo is used in the nav, the About section and as the favicon. Dark artwork on a transparent background suits the white page best.
 
 ---
 
 ## Design system
 
-Colours and fonts are defined as custom properties on `:root` in `css/base.css`.
+Colours and fonts are defined as custom properties on `:root` in `css/base.css`. Every text colour reads at 4.5:1 or better on the background. The animations use the same colours, listed at the top of `js/visuals.js`, so update both when changing the palette.
 
 | Token       | Value     | Use                          |
 | ----------- | --------- | ---------------------------- |
-| `--bg`      | `#050505` | Background                   |
-| `--ink`     | `#f4efe6` | Primary text, buttons        |
-| `--soft`    | `#d6d0c7` | Body paragraphs              |
-| `--muted`   | `#a7a19a` | Secondary text               |
-| `--ember`   | `#ff7a3d` | Research accent              |
-| `--crimson` | `#d9412b` | Risk accent                  |
-| `--teal`    | `#3fae8f` | Development accent           |
-| `--amber`   | `#e9b35a` | Marketing accent, highlights |
+| `--bg`      | `#fdfcf9` | Background (warm white)      |
+| `--ink`     | `#16130f` | Headings, primary text       |
+| `--soft`    | `#3d3832` | Body paragraphs              |
+| `--muted`   | `#6b645b` | Secondary text               |
+| `--card`    | `#ffffff` | Team page cards              |
+| `--ember`   | `#b84d1c` | Research accent              |
+| `--crimson` | `#b8322a` | Risk accent, Apply hover     |
+| `--teal`    | `#1d7a61` | Development accent           |
+| `--amber`   | `#9a6a12` | Marketing accent, gold text  |
+| `--gold`    | `#d9a441` | Sparkles, Join hover (decoration only, too light for text) |
 
 Typefaces, all from Google Fonts:
 
