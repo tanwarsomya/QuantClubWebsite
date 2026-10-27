@@ -13,7 +13,8 @@
 }
 /* Added by js/main.js once the page is scrolled */
 .nav.scrolled {
-  background: rgba(5, 5, 5, 0.6);
+  background: rgba(253, 252, 249, 0.82);
+  box-shadow: 0 1px 0 var(--line);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -54,7 +55,7 @@
   border-radius: 999px;
   transition: background .2s;
 }
-.btn-join:hover { background: var(--amber); }
+.btn-join:hover { background: var(--gold); color: var(--ink); }
 .btn-apply {
   display: inline-block;
   border: 1px solid var(--ink);
@@ -65,7 +66,7 @@
   letter-spacing: .06em;
   transition: background .25s, color .25s;
 }
-.btn-apply:hover { background: var(--ink); color: var(--bg); }
+.btn-apply:hover { background: var(--crimson); border-color: var(--crimson); color: #fff; }
 /* Small uppercase label above a big title */
 .eyebrow {
   font-family: var(--mono);
@@ -114,7 +115,7 @@
 .sparkle {
   position: absolute;
   width: 34px; height: 34px;
-  background: var(--ink);
+  background: var(--gold);
   clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
   animation: twinkle 4s ease-in-out infinite;
 }

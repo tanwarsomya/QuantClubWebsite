@@ -75,7 +75,8 @@
 
 /* ---------- Cards (focus areas, members, projects) ---------- */
 .tp-card, .tp-member, .tp-project {
-  background: rgba(244, 239, 230, 0.03);
+  background: var(--card);
+  box-shadow: 0 1px 2px rgba(22, 19, 15, 0.04);
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 24px;
