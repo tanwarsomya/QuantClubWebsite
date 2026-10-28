@@ -74,7 +74,8 @@
   margin: 0 auto;
   padding: 140px 24px;
 }
-.about-mark { display: flex; align-items: center; gap: 20px; }
+.about-mark { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.about-mark img { width: 200px; height: auto; }
 .wordmark {
   font-family: var(--serif);
   font-size: 34px;
@@ -117,5 +118,6 @@
   .about { padding-left: 16px; padding-right: 16px; }
   .about-text { text-align: left; font-size: 16px; }
   .wordmark { font-size: 28px; }
+  .about-mark img { width: 160px; }
   .recruit-teams { font-size: 18px; gap: 10px 24px; }
 }

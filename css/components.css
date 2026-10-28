@@ -33,7 +33,7 @@
 .nav-right { justify-content: flex-start; }
 .nav-links a { opacity: .85; transition: opacity .2s; }
 .nav-links a:hover { opacity: 1; }
-.nav-logo img { width: 40px; height: 40px; transition: transform .4s; }
+.nav-logo img { width: auto; height: 52px; transition: transform .4s; }
 .nav-logo:hover img { transform: rotate(-8deg) scale(1.05); }
 .nav-actions {
   position: absolute;
