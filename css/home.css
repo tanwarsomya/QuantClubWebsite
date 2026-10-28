@@ -113,7 +113,7 @@
 }
 @media (max-width: 640px) {
   .teams { grid-template-columns: 1fr; }
-  .team { min-height: 70vh; border-right: none; padding: 0 16px 44px; }
+  .team { min-height: 88vh; min-height: 88svh; border-right: none; padding: 0 16px 44px; }
   .about { padding-left: 16px; padding-right: 16px; }
   .about-text { text-align: left; font-size: 16px; }
   .wordmark { font-size: 28px; }

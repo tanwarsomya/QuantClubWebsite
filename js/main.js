@@ -31,7 +31,10 @@
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      scene.draw = makers[el.dataset.team](ctx, width, height, canvas.dataset.fit);
+      // Free space above the column text, so the visual never sits behind it
+      const copy = el.querySelector(".team-copy");
+      const space = copy ? copy.getBoundingClientRect().top - canvas.getBoundingClientRect().top : height;
+      scene.draw = makers[el.dataset.team](ctx, width, height, canvas.dataset.fit, space);
       // Run ahead so the still frame shows a fully formed visual
       for (let i = 0; i < WARMUP_FRAMES; i++) scene.draw();
     };

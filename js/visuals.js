@@ -2,13 +2,22 @@
    visuals.js — the four team animations, drawn on <canvas>
    Loaded before main.js, which mounts and plays them.
 
-   Each visual is a function (ctx, width, height, fit) that
+   Each visual is a function (ctx, width, height, fit, space) that
    sets up its state and returns a draw() function rendering
    one frame. To add a team, write a new function here and add
    it to the object returned at the bottom, keyed by the same
    name used in the page's data-team attribute.
    ========================================================= */
 window.TeamVisuals = (() => {
+  // ---------- Colours (RGB triples, matching css/base.css) ----------
+  const C = {
+    ink: "22,19,15",       // --ink
+    ember: "184,77,28",    // --ember   (Research)
+    crimson: "184,50,42",  // --crimson (Risk)
+    teal: "29,122,97",     // --teal    (Development)
+    gold: "217,164,65",    // --gold    (Marketing, highlights)
+  };
+
   // ---------- Helpers ----------
   // Box–Muller standard normal
   const randn = () => {
@@ -18,18 +27,24 @@ window.TeamVisuals = (() => {
     return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
   };
 
-  // Where a visual sits on its canvas: above the text in a home-page column,
-  // or centred when the canvas has data-fit="center" (team page hero)
-  const area = (w, h, fit) => fit === "center"
-    ? { cx: w / 2, cy: h / 2, r: Math.min(w, h) * 0.32 }
-    : { cx: w / 2, cy: h * 0.42, r: Math.min(w * 0.4, h * 0.25) };
+  // Where a visual sits on its canvas: centred when the canvas has
+  // data-fit="center" (team page hero), otherwise in the free space above
+  // the column text. `space` is the height of that free space (from main.js).
+  // Visuals reach about 1.1 r above and below their centre.
+  const NAV_CLEARANCE = 72;
+  const area = (w, h, fit, space = h) => {
+    if (fit === "center") return { cx: w / 2, cy: h / 2, r: Math.min(w, h) * 0.32 };
+    const r = Math.max(40, Math.min(w * 0.4, h * 0.25, (space - NAV_CLEARANCE) / 2.2));
+    const cy = Math.min(h * 0.42, space - 1.1 * r - 12);
+    return { cx: w / 2, cy, r };
+  };
 
   // ---------- Team visuals ----------
-  // Each takes (ctx, width, height, fit) and returns a draw() that renders one frame.
+  // Each takes (ctx, width, height, fit, space) and returns a draw() that renders one frame.
 
   // RESEARCH: Monte Carlo price paths fanning out from a common origin
-  function research(ctx, w, h, fit) {
-    const { cx, cy, r } = area(w, h, fit);
+  function research(ctx, w, h, fit, space) {
+    const { cx, cy, r } = area(w, h, fit, space);
     const steps = 120, n = 34;
     let paths = [];
     const reset = () => {
@@ -50,15 +65,16 @@ window.TeamVisuals = (() => {
         ctx.beginPath();
         for (let i = 0; i < shown; i++) {
           const x = x0 + (i / (steps - 1)) * (x1 - x0);
-          const y = cy - p.pts[i] * r * 0.55;
+          // tanh keeps rare outliers within about one radius of the centre
+          const y = cy - Math.tanh(p.pts[i] / 1.8) * 1.8 * r * 0.55;
           i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
         }
         const a = 0.35 + p.hue * 0.5;
-        ctx.strokeStyle = p.hue > 0.5 ? `rgba(255,122,61,${a})` : `rgba(217,65,43,${a})`;
+        ctx.strokeStyle = p.hue > 0.5 ? `rgba(${C.ember},${a})` : `rgba(${C.crimson},${a})`;
         ctx.stroke();
       }
       // Origin glow
-      ctx.fillStyle = "#ffb27a";
+      ctx.fillStyle = `rgb(${C.ember})`;
       ctx.beginPath(); ctx.arc(x0, cy, 2.5, 0, Math.PI * 2); ctx.fill();
       t += 0.8;
       if (t > steps + 90) { t = 0; reset(); }
@@ -66,8 +82,8 @@ window.TeamVisuals = (() => {
   }
 
   // RISK: a return distribution building up, with the VaR tail highlighted
-  function risk(ctx, w, h, fit) {
-    const { cx, cy, r } = area(w, h, fit);
+  function risk(ctx, w, h, fit, space) {
+    const { cx, cy, r } = area(w, h, fit, space);
     const bins = 48, counts = new Array(bins).fill(0);
     const lo = -3.2, hi = 3.2, varCut = -1.645;
     let total = 0, ripple = 0;
@@ -85,30 +101,30 @@ window.TeamVisuals = (() => {
         const z = lo + ((i + 0.5) / bins) * (hi - lo);
         const bh = (counts[i] / max) * r * 1.2;
         const tail = z < varCut;
-        ctx.fillStyle = tail ? "rgba(217,65,43,0.9)" : "rgba(233,179,90,0.32)";
+        ctx.fillStyle = tail ? `rgba(${C.crimson},0.85)` : `rgba(${C.gold},0.5)`;
         ctx.fillRect(x0 + i * bw + 1, base - bh, bw - 2, bh);
       }
       // VaR line
       const vx = x0 + ((varCut - lo) / (hi - lo)) * r * 2.1;
-      ctx.strokeStyle = "rgba(244,239,230,0.7)";
+      ctx.strokeStyle = `rgba(${C.ink},0.6)`;
       ctx.setLineDash([3, 4]);
       ctx.beginPath(); ctx.moveTo(vx, base - r * 1.35); ctx.lineTo(vx, base + 6); ctx.stroke();
       ctx.setLineDash([]);
-      ctx.fillStyle = "rgba(244,239,230,0.75)";
+      ctx.fillStyle = `rgba(${C.ink},0.7)`;
       ctx.font = "10px 'JetBrains Mono', monospace";
       ctx.fillText("VaR 95%", vx + 6, base - r * 1.28);
       // Limit ring pulsing outward
       ripple = (ripple + 0.6) % 60;
-      ctx.strokeStyle = `rgba(217,65,43,${0.5 * (1 - ripple / 60)})`;
+      ctx.strokeStyle = `rgba(${C.crimson},${0.5 * (1 - ripple / 60)})`;
       ctx.beginPath(); ctx.arc(vx, base, ripple, Math.PI, 0); ctx.stroke();
-      ctx.strokeStyle = "rgba(244,239,230,0.18)";
+      ctx.strokeStyle = `rgba(${C.ink},0.18)`;
       ctx.beginPath(); ctx.moveTo(x0, base + 0.5); ctx.lineTo(x0 + r * 2.1, base + 0.5); ctx.stroke();
     };
   }
 
   // DEVELOPMENT: a grid of glyphs forming a "Q", flickering like a terminal
-  function development(ctx, w, h, fit) {
-    const { cx, cy, r } = area(w, h, fit);
+  function development(ctx, w, h, fit, space) {
+    const { cx, cy, r } = area(w, h, fit, space);
     const glyphs = "01{}<>=+*/#$%λΣ∂";
     const cell = 11, cols = Math.floor((r * 2.2) / cell), rows = cols;
     const ox = cx - (cols * cell) / 2, oy = cy - (rows * cell) / 2;
@@ -133,15 +149,15 @@ window.TeamVisuals = (() => {
         if (Math.random() < 0.02) c.ch = glyphs[(Math.random() * glyphs.length) | 0];
         const near = Math.max(0, 1 - Math.abs(c.j - scan) / 4);
         const alpha = c.on ? 0.55 + 0.45 * near : 0.06 + 0.25 * near * c.a;
-        ctx.fillStyle = c.on ? `rgba(63,174,143,${alpha})` : `rgba(244,239,230,${alpha})`;
+        ctx.fillStyle = c.on ? `rgba(${C.teal},${alpha})` : `rgba(${C.ink},${alpha})`;
         ctx.fillText(c.ch, ox + c.i * cell + cell / 2, oy + c.j * cell + cell / 2);
       }
     };
   }
 
   // MARKETING: signal broadcast — rays and expanding waves from a point
-  function marketing(ctx, w, h, fit) {
-    const { cx, cy, r } = area(w, h, fit);
+  function marketing(ctx, w, h, fit, space) {
+    const { cx, cy, r } = area(w, h, fit, space);
     const rays = 28;
     let t = 0;
     return () => {
@@ -150,7 +166,7 @@ window.TeamVisuals = (() => {
       for (let i = 0; i < rays; i++) {
         const ang = (i / rays) * Math.PI * 2 + t * 0.002;
         const pulse = 0.5 + 0.5 * Math.sin(t * 0.03 + i * 1.7);
-        ctx.strokeStyle = `rgba(233,179,90,${0.12 + 0.45 * pulse})`;
+        ctx.strokeStyle = `rgba(${C.gold},${0.2 + 0.5 * pulse})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(cx, cy);
@@ -159,12 +175,12 @@ window.TeamVisuals = (() => {
       }
       for (let k = 0; k < 4; k++) {
         const rr = ((t * 0.6 + k * r * 0.5) % (r * 2));
-        ctx.strokeStyle = `rgba(255,122,61,${0.55 * (1 - rr / (r * 2))})`;
+        ctx.strokeStyle = `rgba(${C.ember},${0.55 * (1 - rr / (r * 2))})`;
         ctx.beginPath(); ctx.arc(cx, cy, rr, 0, Math.PI * 2); ctx.stroke();
       }
       const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 18);
-      g.addColorStop(0, "rgba(255,230,180,1)");
-      g.addColorStop(1, "rgba(255,230,180,0)");
+      g.addColorStop(0, `rgba(${C.gold},1)`);
+      g.addColorStop(1, `rgba(${C.gold},0)`);
       ctx.fillStyle = g;
       ctx.beginPath(); ctx.arc(cx, cy, 18, 0, Math.PI * 2); ctx.fill();
       t++;
