@@ -90,7 +90,7 @@
 }
 /* The still frame brightens while its animation plays (class set by js/main.js) */
 .is-playing .team-canvas { opacity: 1; filter: none; }
-@media (hover: none) {
+@media (pointer: coarse) {
   [data-team] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 }
 
