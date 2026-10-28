@@ -2,7 +2,7 @@
    visuals.js — the four team animations, drawn on <canvas>
    Loaded before main.js, which mounts and plays them.
 
-   Each visual is a function (ctx, width, height, fit) that
+   Each visual is a function (ctx, width, height, fit, space) that
    sets up its state and returns a draw() function rendering
    one frame. To add a team, write a new function here and add
    it to the object returned at the bottom, keyed by the same
@@ -27,18 +27,24 @@ window.TeamVisuals = (() => {
     return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
   };
 
-  // Where a visual sits on its canvas: above the text in a home-page column,
-  // or centred when the canvas has data-fit="center" (team page hero)
-  const area = (w, h, fit) => fit === "center"
-    ? { cx: w / 2, cy: h / 2, r: Math.min(w, h) * 0.32 }
-    : { cx: w / 2, cy: h * 0.42, r: Math.min(w * 0.4, h * 0.25) };
+  // Where a visual sits on its canvas: centred when the canvas has
+  // data-fit="center" (team page hero), otherwise in the free space above
+  // the column text. `space` is the height of that free space (from main.js).
+  // Visuals reach about 1.1 r above and below their centre.
+  const NAV_CLEARANCE = 72;
+  const area = (w, h, fit, space = h) => {
+    if (fit === "center") return { cx: w / 2, cy: h / 2, r: Math.min(w, h) * 0.32 };
+    const r = Math.max(40, Math.min(w * 0.4, h * 0.25, (space - NAV_CLEARANCE) / 2.2));
+    const cy = Math.min(h * 0.42, space - 1.1 * r - 12);
+    return { cx: w / 2, cy, r };
+  };
 
   // ---------- Team visuals ----------
-  // Each takes (ctx, width, height, fit) and returns a draw() that renders one frame.
+  // Each takes (ctx, width, height, fit, space) and returns a draw() that renders one frame.
 
   // RESEARCH: Monte Carlo price paths fanning out from a common origin
-  function research(ctx, w, h, fit) {
-    const { cx, cy, r } = area(w, h, fit);
+  function research(ctx, w, h, fit, space) {
+    const { cx, cy, r } = area(w, h, fit, space);
     const steps = 120, n = 34;
     let paths = [];
     const reset = () => {
@@ -75,8 +81,8 @@ window.TeamVisuals = (() => {
   }
 
   // RISK: a return distribution building up, with the VaR tail highlighted
-  function risk(ctx, w, h, fit) {
-    const { cx, cy, r } = area(w, h, fit);
+  function risk(ctx, w, h, fit, space) {
+    const { cx, cy, r } = area(w, h, fit, space);
     const bins = 48, counts = new Array(bins).fill(0);
     const lo = -3.2, hi = 3.2, varCut = -1.645;
     let total = 0, ripple = 0;
@@ -116,8 +122,8 @@ window.TeamVisuals = (() => {
   }
 
   // DEVELOPMENT: a grid of glyphs forming a "Q", flickering like a terminal
-  function development(ctx, w, h, fit) {
-    const { cx, cy, r } = area(w, h, fit);
+  function development(ctx, w, h, fit, space) {
+    const { cx, cy, r } = area(w, h, fit, space);
     const glyphs = "01{}<>=+*/#$%λΣ∂";
     const cell = 11, cols = Math.floor((r * 2.2) / cell), rows = cols;
     const ox = cx - (cols * cell) / 2, oy = cy - (rows * cell) / 2;
@@ -149,8 +155,8 @@ window.TeamVisuals = (() => {
   }
 
   // MARKETING: signal broadcast — rays and expanding waves from a point
-  function marketing(ctx, w, h, fit) {
-    const { cx, cy, r } = area(w, h, fit);
+  function marketing(ctx, w, h, fit, space) {
+    const { cx, cy, r } = area(w, h, fit, space);
     const rays = 28;
     let t = 0;
     return () => {
