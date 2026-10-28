@@ -29,7 +29,7 @@
 .tp-title {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(48px, 7vw, 96px);
+  font-size: clamp(40px, 5vw, 68px); /* "DEVELOPMENT" must fit half the hero */
   line-height: .95;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -169,6 +169,7 @@
 @media (max-width: 900px) {
   .tp-hero { grid-template-columns: 1fr; min-height: 0; padding-top: 100px; }
   .tp-visual { max-width: 420px; width: 100%; }
+  .tp-title { font-size: clamp(48px, 9vw, 80px); }
   .tp-focus { grid-template-columns: 1fr; }
   .tp-members { grid-template-columns: repeat(2, 1fr); }
   .tp-projects { grid-template-columns: 1fr; }
