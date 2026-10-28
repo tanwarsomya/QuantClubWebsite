@@ -65,7 +65,8 @@ window.TeamVisuals = (() => {
         ctx.beginPath();
         for (let i = 0; i < shown; i++) {
           const x = x0 + (i / (steps - 1)) * (x1 - x0);
-          const y = cy - p.pts[i] * r * 0.55;
+          // tanh keeps rare outliers within about one radius of the centre
+          const y = cy - Math.tanh(p.pts[i] / 1.8) * 1.8 * r * 0.55;
           i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
         }
         const a = 0.35 + p.hue * 0.5;
