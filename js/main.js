@@ -59,19 +59,18 @@
     if (on && rafId === null) rafId = requestAnimationFrame(loop);
   };
 
-  const canHover = window.matchMedia("(hover: hover)").matches;
+  // Decide per event, not per device: touchscreen laptops report "no hover"
+  // even when a mouse is being used.
   for (const s of scenes) {
-    if (canHover) {
-      s.el.addEventListener("mouseenter", () => setPlaying(s, true));
-      s.el.addEventListener("mouseleave", () => setPlaying(s, false));
-    } else {
-      // Touch: tapping a column plays it and pauses the others
-      s.el.addEventListener("click", (e) => {
-        if (e.target.closest("a")) return;
-        const on = !s.playing;
-        scenes.forEach((x) => setPlaying(x, x === s && on));
-      });
-    }
+    // Mouse or pen: play while the pointer is over the element
+    s.el.addEventListener("pointerenter", (e) => { if (e.pointerType !== "touch") setPlaying(s, true); });
+    s.el.addEventListener("pointerleave", (e) => { if (e.pointerType !== "touch") setPlaying(s, false); });
+    // Touch: tapping plays this one and pauses the others; tapping a link just follows it
+    s.el.addEventListener("pointerup", (e) => {
+      if (e.pointerType !== "touch" || e.target.closest("a")) return;
+      const on = !s.playing;
+      scenes.forEach((x) => setPlaying(x, x === s && on));
+    });
     // Keyboard users get the animation when tabbing to the apply link
     s.el.addEventListener("focusin", () => setPlaying(s, true));
     s.el.addEventListener("focusout", () => setPlaying(s, false));

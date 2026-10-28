@@ -31,7 +31,7 @@ window.TeamVisuals = (() => {
   // data-fit="center" (team page hero), otherwise in the free space above
   // the column text. `space` is the height of that free space (from main.js).
   // Visuals reach about 1.1 r above and below their centre.
-  const NAV_CLEARANCE = 72;
+  const NAV_CLEARANCE = 92; // nav bar height plus a small margin
   const area = (w, h, fit, space = h) => {
     if (fit === "center") return { cx: w / 2, cy: h / 2, r: Math.min(w, h) * 0.32 };
     const r = Math.max(40, Math.min(w * 0.4, h * 0.25, (space - NAV_CLEARANCE) / 2.2));

@@ -36,7 +36,9 @@ I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no f
 │   ├── visuals.js           The four team animations            (every page)
 │   └── main.js              Nav, footer year, animation playback (every page)
 └── assets/
-    └── logo.svg             Club logo, also used as the favicon
+    ├── logo.png             Club logo (dark, used on the site)
+    ├── logo-white.png       Club logo (white, for dark backgrounds)
+    └── favicon.png          Browser tab icon (square crop of the Q)
 ```
 
 Every page loads `base.css`, `components.css` and then its own stylesheet, followed by `visuals.js` and then `main.js`. The order matters: later files build on earlier ones.
@@ -56,7 +58,7 @@ Every page loads `base.css`, `components.css` and then its own stylesheet, follo
 | The team page layout                       | `css/team-page.css`                                    |
 | How a team animation looks                 | `js/visuals.js`                                        |
 | When animations play                       | `js/main.js`                                           |
-| The logo                                   | `assets/logo.svg`                                      |
+| The logo                                   | `assets/logo.png` and `assets/favicon.png`             |
 
 ---
 
@@ -146,7 +148,7 @@ To remove a team, undo the same steps.
 
 ### Logo
 
-Replace `assets/logo.svg`. The logo is used in the nav, the About section and as the favicon. Dark artwork on a transparent background suits the white page best.
+The logo is the Q and mesh mark, cut out of the official artwork onto a transparent background. `assets/logo.png` (dark) is used in the nav and the About section, and `assets/favicon.png` is a square crop around the Q for the browser tab. `assets/logo-white.png` is the same mark in white, for dark backgrounds such as posters. To update the logo, replace these files and keep the same names. The mark is wide, so the nav sizes it by height.
 
 ---
 
