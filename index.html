@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Stockholm Student Quantitative Fund</title>
-  <meta name="description" content="Stockholm Student Quantitative Fund — a student-run fund in Stockholm doing quantitative research, risk management and trading development.">
+  <meta name="description" content="Stockholm Student Quantitative Fund: a quantitative fund built on mathematics, data and algorithms, researched, built and run by students of KTH Royal Institute of Technology.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/home.css">
@@ -50,6 +50,25 @@
   </header>
 
   <main id="top">
+    <!-- Hero: who we are, in the style of the posters -->
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-mesh" src="assets/hero-mesh.svg" alt="" aria-hidden="true">
+      <span class="sparkle sparkle-a" aria-hidden="true"></span>
+      <span class="sparkle sparkle-b" aria-hidden="true"></span>
+      <span class="sparkle sparkle-c" aria-hidden="true"></span>
+      <div class="hero-inner">
+        <p class="eyebrow hero-eyebrow">Stockholm &middot; Run by KTH students</p>
+        <h1 id="hero-title" class="hero-title">Stockholm Student Quantitative Fund</h1>
+        <p class="hero-tagline">Strategies written in mathematics.<br>Tested on data. Executed by algorithms.</p>
+        <p class="hero-lead">A quantitative fund researched, built and run by students of KTH Royal Institute of Technology.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#teams">Meet the teams</a>
+          <a class="btn-apply" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener">Join Marketing &amp; Sales</a>
+        </div>
+      </div>
+      <a class="hero-scroll" href="#teams">Our teams <span aria-hidden="true">↓</span></a>
+    </section>
+
     <!-- Teams: full-height columns, each with its own generative visual -->
     <section id="teams" class="teams" aria-label="Teams">
       <article class="team" data-team="research">
@@ -58,7 +77,6 @@
           <h2><a href="teams/research.html">Research</a></h2>
           <p>Writing papers, backtesting strategies and developing mathematical models.</p>
           <a class="team-more" href="teams/research.html">meet the team</a>
-          <a class="team-link" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener" style="--accent: var(--ember)">apply to research <span aria-hidden="true">→</span></a>
         </div>
       </article>
 
@@ -68,7 +86,6 @@
           <h2><a href="teams/risk.html">Risk</a></h2>
           <p>Monitoring portfolio risk, limits and positions.</p>
           <a class="team-more" href="teams/risk.html">meet the team</a>
-          <a class="team-link" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener" style="--accent: var(--crimson)">apply to risk <span aria-hidden="true">→</span></a>
         </div>
       </article>
 
@@ -78,17 +95,16 @@
           <h2><a href="teams/development.html">Development</a></h2>
           <p>Building the trading infrastructure, data pipelines and tooling behind the fund.</p>
           <a class="team-more" href="teams/development.html">meet the team</a>
-          <a class="team-link" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener" style="--accent: var(--teal)">apply to development <span aria-hidden="true">→</span></a>
         </div>
       </article>
 
       <article class="team" data-team="marketing">
         <canvas class="team-canvas" aria-hidden="true"></canvas>
         <div class="team-copy">
-          <h2><a href="teams/marketing.html">Marketing</a></h2>
-          <p>Telling our story, running events and growing our network with industry.</p>
+          <h2><a href="teams/marketing.html">Marketing &amp; Sales</a></h2>
+          <p>Telling our story, running events and bringing in partners and sponsors.</p>
           <a class="team-more" href="teams/marketing.html">meet the team</a>
-          <a class="team-link" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener" style="--accent: var(--amber)">apply to marketing <span aria-hidden="true">→</span></a>
+          <a class="team-link" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener" style="--accent: var(--amber)">apply to marketing &amp; sales <span aria-hidden="true">→</span></a>
         </div>
       </article>
     </section>
@@ -100,10 +116,10 @@
         <p class="wordmark">Stockholm Student<br>Quantitative Fund</p>
       </div>
       <p class="about-text">
-        Stockholm Student Quantitative Fund is run by students who apply mathematics,
+        Stockholm Student Quantitative Fund is run by students of KTH Royal Institute of Technology who apply mathematics,
         statistics and software to real markets. The fund is organised in four teams:
         Research develops and backtests strategies, Risk keeps the portfolio within its limits,
-        Development builds the systems that run it, and Marketing connects the fund with students and industry.
+        Development builds the systems that run it, and Marketing &amp; Sales connects the fund with students, partners and sponsors.
       </p>
     </section>
 
@@ -115,10 +131,7 @@
       <p class="eyebrow">Now accepting applications</p>
       <h2 class="recruit-title">Recruitment<br>Open</h2>
       <ul class="recruit-teams">
-        <li><a href="teams/research.html">Research</a></li>
-        <li><a href="teams/risk.html">Risk</a></li>
-        <li><a href="teams/development.html">Development</a></li>
-        <li><a href="teams/marketing.html">Marketing</a></li>
+        <li><a href="teams/marketing.html">Marketing &amp; Sales</a></li>
       </ul>
       <a class="btn-apply" href="https://docs.google.com/forms/d/1n1kMpHJy04ATh5YQ5JQs3Je1VNDVDxD4pKgrXZNsmHk/viewform" target="_blank" rel="noopener">Apply now</a>
     </section>
@@ -141,7 +154,7 @@
           <li><a href="teams/research.html">Research</a></li>
           <li><a href="teams/risk.html">Risk</a></li>
           <li><a href="teams/development.html">Development</a></li>
-          <li><a href="teams/marketing.html">Marketing</a></li>
+          <li><a href="teams/marketing.html">Marketing &amp; Sales</a></li>
         </ul>
       </div>
       <div class="footer-col">

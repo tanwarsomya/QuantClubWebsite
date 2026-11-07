@@ -67,6 +67,20 @@
   transition: background .25s, color .25s;
 }
 .btn-apply:hover { background: var(--crimson); border-color: var(--crimson); color: #fff; }
+/* Filled counterpart to .btn-apply, for the main action in a pair */
+.btn-primary {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--bg);
+  border: 1px solid var(--ink);
+  padding: 14px 34px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  transition: background .25s, color .25s, border-color .25s;
+}
+.btn-primary:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 /* Small uppercase label above a big title */
 .eyebrow {
   font-family: var(--mono);
