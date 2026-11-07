@@ -34,6 +34,12 @@
   letter-spacing: .06em;
   text-transform: uppercase;
   margin-bottom: 10px;
+  /* Room for two lines ("Marketing & Sales"), bottom-aligned so every column's title shares a baseline */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 2.3em;
+  line-height: 1.15;
 }
 .team h2 a:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
 .team p {
