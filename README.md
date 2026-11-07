@@ -30,7 +30,7 @@ I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no f
 ├── css/
 │   ├── base.css             Colours, fonts, reset, background   (every page)
 │   ├── components.css       Nav, buttons, visuals, footer       (every page)
-│   ├── home.css             Team columns, About, Recruitment    (index.html only)
+│   ├── home.css             Hero, team columns, About, Recruitment (index.html only)
 │   └── team-page.css        Team page layout                    (teams/*.html only)
 ├── js/
 │   ├── visuals.js           The four team animations            (every page)
@@ -38,7 +38,8 @@ I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no f
 └── assets/
     ├── logo.png             Fund logo (dark, used on the site)
     ├── logo-white.png       Fund logo (white, for dark backgrounds)
-    └── favicon.png          Browser tab icon (square crop of the Q)
+    ├── favicon.png          Browser tab icon (square crop of the Q)
+    └── hero-mesh.svg        Faint curved mesh behind the home page hero
 ```
 
 Every page loads `base.css`, `components.css` and then its own stylesheet, followed by `visuals.js` and then `main.js`. The order matters: later files build on earlier ones.
@@ -82,6 +83,7 @@ Then visit http://localhost:5173.
 | ----------- | ------------------- | ------------------------------------------------------------------- |
 | Background  | `.aurora`, `.grain` | Blurred, slowly drifting colour blobs with a film-grain overlay     |
 | Navigation  | `header.nav`        | Links, centred logo, Join button, social icons                      |
+| Hero        | `.hero`             | Fund name, tagline, KTH line and buttons, over a faint curved mesh  |
 | Teams       | `#teams`            | Four full-height columns, each with its own animated canvas         |
 | About       | `#about`            | Logo, wordmark and fund description                                  |
 | Recruitment | `#recruitment`      | Poster-style "Recruitment Open" section linking to the application form |
@@ -138,14 +140,14 @@ On the home page, each team's name and summary are the `<h2>` and `<p>` inside i
 
 ### Opening or closing recruitment
 
-Only Marketing & Sales is recruiting right now. Research, Risk and Development are closed.
+Only Marketing & Sales is recruiting right now. Teams that aren't recruiting simply have no apply link or button; nothing on the site says they are closed.
 
 To close a team:
 
-1. In `index.html`, replace the team's `<a class="team-link" …>apply to …</a>` with `<span class="team-link team-closed">applications closed</span>`, remove it from the Recruitment list (`.recruit-teams`) and update the `.recruit-note` sentence.
-2. On its page in `teams/`, replace the hero's `Apply to …` button with `<p class="tp-closed">Applications closed</p>`, and change the `.tp-cta` section to the "Applications Closed" version used on the Risk page.
+1. In `index.html`, delete the team's `<a class="team-link" …>apply to …</a>` and remove it from the Recruitment list (`.recruit-teams`). The column keeps a reserved row, so the teams stay aligned.
+2. On its page in `teams/`, delete the hero's `Apply to …` button and the `<!-- Call to action -->` section at the bottom.
 
-To open a team, do the reverse, copying the links and sections from `teams/marketing.html` and the Marketing & Sales column in `index.html`.
+To open a team, do the reverse, copying the apply link from the Marketing & Sales column in `index.html` and the button and call-to-action section from `teams/marketing.html`. If it's the only team recruiting, update the hero's "Join Marketing & Sales" button too.
 
 ### Adding a team
 
