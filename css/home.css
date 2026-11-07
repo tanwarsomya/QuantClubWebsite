@@ -69,6 +69,9 @@
   color: var(--accent);
 }
 .team-link:hover { text-decoration: underline; }
+/* Shown instead of the apply link when a team isn't recruiting */
+.team-closed { color: var(--muted); }
+.team-closed:hover { text-decoration: none; }
 
 /* ---------- About ---------- */
 .about {

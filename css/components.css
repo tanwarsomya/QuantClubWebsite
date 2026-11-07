@@ -67,6 +67,14 @@
   transition: background .25s, color .25s;
 }
 .btn-apply:hover { background: var(--crimson); border-color: var(--crimson); color: #fff; }
+/* Short line under a call-to-action title, e.g. which teams are recruiting */
+.recruit-note {
+  max-width: 440px;
+  margin: 0 auto 32px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
 /* Small uppercase label above a big title */
 .eyebrow {
   font-family: var(--mono);
