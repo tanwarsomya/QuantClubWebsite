@@ -24,6 +24,10 @@
 .team-copy {
   position: relative;
   text-align: center;
+  /* Title, summary, "meet the team", apply link. The last row is reserved even when a
+     team has no apply link, so every column's text lines up. */
+  display: grid;
+  grid-template-rows: auto auto auto 1.5em;
   transition: transform .4s;
 }
 .team:hover .team-copy { transform: translateY(-6px); }
@@ -69,9 +73,6 @@
   color: var(--accent);
 }
 .team-link:hover { text-decoration: underline; }
-/* Shown instead of the apply link when a team isn't recruiting */
-.team-closed { color: var(--muted); }
-.team-closed:hover { text-decoration: none; }
 
 /* ---------- About ---------- */
 .about {

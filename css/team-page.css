@@ -25,14 +25,6 @@
   transition: color .2s;
 }
 .tp-back:hover { color: var(--ink); }
-/* Replaces the apply button on teams that aren't recruiting */
-.tp-closed {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
 .team-page .eyebrow { color: var(--accent); }
 .tp-title {
   font-family: var(--serif);
