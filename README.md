@@ -1,6 +1,6 @@
-# KTH Quantitative Investment Club — Website
+# Stockholm Student Quantitative Fund — Website
 
-The public website for the KTH Quantitative Investment Club. It introduces our four teams (Research, Risk, Development and Marketing), explains who we are and links to our application form.
+The public website for the Stockholm Student Quantitative Fund. It introduces our four teams (Research, Risk, Development and Marketing), explains who we are and links to our application form.
 
 I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no framework, no build step and no dependencies. The look is light and editorial: a warm white background, soft gold and red washes, gold and red accents and high-contrast serif type.
 
@@ -36,8 +36,8 @@ I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no f
 │   ├── visuals.js           The four team animations            (every page)
 │   └── main.js              Nav, footer year, animation playback (every page)
 └── assets/
-    ├── logo.png             Club logo (dark, used on the site)
-    ├── logo-white.png       Club logo (white, for dark backgrounds)
+    ├── logo.png             Fund logo (dark, used on the site)
+    ├── logo-white.png       Fund logo (white, for dark backgrounds)
     └── favicon.png          Browser tab icon (square crop of the Q)
 ```
 
@@ -83,7 +83,7 @@ Then visit http://localhost:5173.
 | Background  | `.aurora`, `.grain` | Blurred, slowly drifting colour blobs with a film-grain overlay     |
 | Navigation  | `header.nav`        | Links, centred logo, Join button, social icons                      |
 | Teams       | `#teams`            | Four full-height columns, each with its own animated canvas         |
-| About       | `#about`            | Logo, wordmark and club description                                 |
+| About       | `#about`            | Logo, wordmark and fund description                                  |
 | Recruitment | `#recruitment`      | Poster-style "Recruitment Open" section linking to the application form |
 | Footer      | `#contact`          | Link columns and copyright                                          |
 
