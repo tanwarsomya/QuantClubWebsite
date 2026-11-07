@@ -1,6 +1,6 @@
 # Stockholm Student Quantitative Fund — Website
 
-The public website for the Stockholm Student Quantitative Fund. It introduces our four teams (Research, Risk, Development and Marketing & Sales), explains who we are and links to our application form.
+The public website for the Stockholm Student Quantitative Fund. It introduces our four teams (Research, Trading & Risk, Development and Marketing & Sales), explains who we are and links to our application form.
 
 I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no framework, no build step and no dependencies. The look is light and editorial: a warm white background, soft gold and red washes, gold and red accents and high-contrast serif type.
 
@@ -24,7 +24,7 @@ I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no f
 ├── index.html               Home page
 ├── teams/                   One page per team
 │   ├── research.html
-│   ├── risk.html
+│   ├── risk.html            (Trading & Risk)
 │   ├── development.html
 │   └── marketing.html       (Marketing & Sales)
 ├── css/
@@ -177,7 +177,7 @@ Colours and fonts are defined as custom properties on `:root` in `css/base.css`.
 | `--muted`   | `#6b645b` | Secondary text               |
 | `--card`    | `#ffffff` | Team page cards              |
 | `--ember`   | `#b84d1c` | Research accent              |
-| `--crimson` | `#b8322a` | Risk accent, Apply hover     |
+| `--crimson` | `#b8322a` | Trading & Risk accent, Apply hover |
 | `--teal`    | `#1d7a61` | Development accent           |
 | `--amber`   | `#9a6a12` | Marketing & Sales accent, gold text |
 | `--gold`    | `#d9a441` | Sparkles, Join hover (decoration only, too light for text) |
