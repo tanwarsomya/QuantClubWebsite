@@ -1,6 +1,6 @@
 # Stockholm Student Quantitative Fund — Website
 
-The public website for the Stockholm Student Quantitative Fund. It introduces our four teams (Research, Risk, Development and Marketing), explains who we are and links to our application form.
+The public website for the Stockholm Student Quantitative Fund. It introduces our four teams (Research, Risk, Development and Marketing & Sales), explains who we are and links to our application form.
 
 I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no framework, no build step and no dependencies. The look is light and editorial: a warm white background, soft gold and red washes, gold and red accents and high-contrast serif type.
 
@@ -26,7 +26,7 @@ I built it as a plain static site in HTML, CSS and vanilla JavaScript, with no f
 │   ├── research.html
 │   ├── risk.html
 │   ├── development.html
-│   └── marketing.html
+│   └── marketing.html       (Marketing & Sales)
 ├── css/
 │   ├── base.css             Colours, fonts, reset, background   (every page)
 │   ├── components.css       Nav, buttons, visuals, footer       (every page)
@@ -125,7 +125,7 @@ The nav and footer are repeated in every HTML page, so a link change has to be m
 
 | Link             | Used in                                                                |
 | ---------------- | ---------------------------------------------------------------------- |
-| Application form | Nav "Join", home "apply to …" links, "Apply now", team page buttons    |
+| Application form | Nav "Join", "apply to …" links and buttons for teams that are recruiting |
 | LinkedIn         | Nav icon, footer                                                       |
 | Instagram        | Footer                                                                 |
 | Email            | Nav icon, footer "Contact"                                             |
@@ -135,6 +135,17 @@ Pages in `teams/` sit one folder down, so their links to shared files start with
 ### Team content
 
 On the home page, each team's name and summary are the `<h2>` and `<p>` inside its `<article class="team">`. Everything else about a team is on its page in `teams/`. To add a member or project there, copy an existing card and edit its text. Ongoing projects use `class="tp-status is-ongoing"`.
+
+### Opening or closing recruitment
+
+Only Marketing & Sales is recruiting right now. Research, Risk and Development are closed.
+
+To close a team:
+
+1. In `index.html`, replace the team's `<a class="team-link" …>apply to …</a>` with `<span class="team-link team-closed">applications closed</span>`, remove it from the Recruitment list (`.recruit-teams`) and update the `.recruit-note` sentence.
+2. On its page in `teams/`, replace the hero's `Apply to …` button with `<p class="tp-closed">Applications closed</p>`, and change the `.tp-cta` section to the "Applications Closed" version used on the Risk page.
+
+To open a team, do the reverse, copying the links and sections from `teams/marketing.html` and the Marketing & Sales column in `index.html`.
 
 ### Adding a team
 
@@ -166,7 +177,7 @@ Colours and fonts are defined as custom properties on `:root` in `css/base.css`.
 | `--ember`   | `#b84d1c` | Research accent              |
 | `--crimson` | `#b8322a` | Risk accent, Apply hover     |
 | `--teal`    | `#1d7a61` | Development accent           |
-| `--amber`   | `#9a6a12` | Marketing accent, gold text  |
+| `--amber`   | `#9a6a12` | Marketing & Sales accent, gold text |
 | `--gold`    | `#d9a441` | Sparkles, Join hover (decoration only, too light for text) |
 
 Typefaces, all from Google Fonts:
