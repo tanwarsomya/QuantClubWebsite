@@ -52,7 +52,7 @@ Every page loads `base.css`, `components.css` and then its own stylesheet, follo
 | ------------------------------------------ | ------------------------------------------------------ |
 | A colour or font                           | `css/base.css` (the `:root` block)                     |
 | Text on the home page                      | `index.html`                                           |
-| A team's description, members or projects | `teams/<team>.html`                                    |
+| A team's description or members           | `teams/<team>.html`                                    |
 | A link in the nav or footer                | Every HTML page (see [Links](#links))                  |
 | The nav, buttons or footer styling         | `css/components.css`                                   |
 | The home page layout                       | `css/home.css`                                         |
@@ -96,8 +96,6 @@ Then visit http://localhost:5173.
 | Hero              | `.tp-hero`     | Team name, summary, apply button and the team visual |
 | What we do        | `.tp-focus`    | Description and focus-area cards                     |
 | Members           | `.tp-members`  | One `.tp-member` card per person                     |
-| Ongoing projects  | `.tp-projects` | One `.tp-project` card per project                   |
-| Finished projects | `.tp-projects` | One `.tp-project` card per project                   |
 | Call to action    | `.tp-cta`      | "Join" section linking to the application form       |
 
 Each team page sets its accent colour with `--accent` on `<body>`, which tints the labels, avatars and card borders.
@@ -136,7 +134,7 @@ Pages in `teams/` sit one folder down, so their links to shared files start with
 
 ### Team content
 
-On the home page, each team's name and summary are the `<h2>` and `<p>` inside its `<article class="team">`. Everything else about a team is on its page in `teams/`. To add a member or project there, copy an existing card and edit its text. Ongoing projects use `class="tp-status is-ongoing"`.
+On the home page, each team's name and summary are the `<h2>` and `<p>` inside its `<article class="team">`. Everything else about a team is on its page in `teams/`. To add a member there, copy an existing `.tp-member` card and edit its text.
 
 ### Opening or closing recruitment
 

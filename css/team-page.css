@@ -73,8 +73,8 @@
   margin-bottom: 40px;
 }
 
-/* ---------- Cards (focus areas, members, projects) ---------- */
-.tp-card, .tp-member, .tp-project {
+/* ---------- Cards (focus areas, members) ---------- */
+.tp-card, .tp-member {
   background: var(--card);
   box-shadow: 0 1px 2px rgba(22, 19, 15, 0.04);
   border: 1px solid var(--line);
@@ -82,16 +82,16 @@
   padding: 24px;
   transition: border-color .25s, transform .25s;
 }
-.tp-card:hover, .tp-member:hover, .tp-project:hover {
+.tp-card:hover, .tp-member:hover {
   border-color: var(--accent);
   transform: translateY(-3px);
 }
-.tp-card h3, .tp-member h3, .tp-project h3 {
+.tp-card h3, .tp-member h3 {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 8px;
 }
-.tp-card p, .tp-project > p:not(.tp-status) {
+.tp-card p {
   font-size: 14px;
   line-height: 1.6;
   color: var(--muted);
@@ -133,34 +133,6 @@
 }
 .tp-member-link:hover { color: var(--ink); }
 
-/* ---------- Projects ---------- */
-.tp-projects {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-.tp-project { display: flex; flex-direction: column; gap: 6px; }
-.tp-status {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-.tp-status.is-ongoing { color: var(--accent); }
-.tp-status.is-ongoing::before { content: "● "; }
-.tp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 6px; }
-.tp-tags li {
-  font-family: var(--mono);
-  font-size: 11px;
-  padding: 3px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--muted);
-}
-.tp-project .tp-member-link { margin-top: auto; padding-top: 8px; }
-
 /* ---------- Call to action ---------- */
 .tp-cta { margin-top: 40px; }
 .tp-cta .recruit-title { margin-bottom: 44px; }
@@ -172,7 +144,6 @@
   .tp-title { font-size: clamp(48px, 9vw, 80px); }
   .tp-focus { grid-template-columns: 1fr; }
   .tp-members { grid-template-columns: repeat(2, 1fr); }
-  .tp-projects { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .tp-hero, .tp-section { padding-left: 16px; padding-right: 16px; }
