@@ -164,6 +164,7 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+.org-nr { white-space: nowrap; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
