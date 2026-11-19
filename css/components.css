@@ -62,7 +62,11 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gold-ink);
+  display: inline-block;
+  transform-origin: left center;
+  transition: letter-spacing .3s ease-in-out, transform .3s ease-in-out;
 }
+.more:hover, .more:focus-visible { letter-spacing: 0.14em; transform: scale(1.06); }
 .more-arrow { display: inline-block; margin-left: 2px; }
 .more.is-shuffling .more-arrow { animation: more-shuffle .7s ease-in-out infinite; }
 @keyframes more-shuffle {
