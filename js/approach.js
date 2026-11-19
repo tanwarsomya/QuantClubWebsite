@@ -1,5 +1,4 @@
-/* "Our Approach": a bell-curve histogram in the centre, with thin lines
- * running from the curve to the rule above each text block. */
+/* "Our Approach": a static bell-curve histogram in the centre. */
 (function () {
   const host = document.querySelector("[data-bell]");
   if (!host) return;
