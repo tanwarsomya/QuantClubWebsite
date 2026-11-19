@@ -8,12 +8,12 @@ section.light, section.approach { padding: 96px 0; }
 
 /* Hero */
 .hero { min-height: calc(100vh - 80px); display: flex; flex-direction: column; justify-content: space-between; padding-top: 80px; }
-.hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; flex: 1; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; flex: 1; }
 .hero-title { margin: 28px 0; font-size: clamp(2.8rem, 6.4vw, 5.2rem); line-height: 1.02; letter-spacing: -0.04em; }
 .hero-title span { color: var(--gold); }
 .hero-lead { max-width: 42ch; color: var(--slate); font-size: 1.05rem; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; margin-top: 40px; }
-.hero-visual { position: relative; justify-self: end; width: min(100%, 420px); }
+.hero-visual { position: relative; justify-self: end; width: min(100%, 600px); }
 .hero-visual svg { width: 100%; height: auto; }
 .hero-index { position: absolute; right: 0; bottom: -8px; font-size: 0.68rem; letter-spacing: 0.22em; color: var(--slate); }
 .hero-bar {
@@ -34,7 +34,7 @@ section.light, section.approach { padding: 96px 0; }
 
 /* Key figures */
 section.figures { padding: 36px 0; border-bottom: 1px solid var(--line-light); }
-.figures-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; text-align: center; }
+.figures-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0 auto; text-align: center; }
 .figures-grid div { display: flex; flex-direction: column-reverse; }
 .figures-grid dd { margin: 0; font-size: 1.6rem; font-weight: 700; color: var(--navy); }
 .figures-grid dt { font-size: 0.8rem; color: var(--ink-soft); }
@@ -46,8 +46,8 @@ section.figures { padding: 36px 0; border-bottom: 1px solid var(--line-light); }
   flex: none;
   display: grid;
   place-items: center;
-  width: 160px;
-  height: 80px;
+  width: 240px;
+  height: 110px;
   border: 1px dashed var(--line-light);
   font-size: 0.75rem;
   color: var(--ink-soft);
@@ -100,7 +100,7 @@ section.figures { padding: 36px 0; border-bottom: 1px solid var(--line-light); }
 @media (max-width: 900px) {
   .hero { min-height: 0; padding-top: 56px; }
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { justify-self: center; width: min(80%, 340px); }
+  .hero-visual { justify-self: center; width: min(100%, 480px); }
   .approach-grid, .about-grid, .news-grid { grid-template-columns: 1fr; gap: 40px; }
   .team-grid { grid-template-columns: 1fr 1fr; }
   section.light, section.approach { padding: 72px 0; }
