@@ -71,7 +71,7 @@
 .more:hover, .more:focus-visible { letter-spacing: 0.14em; transform: scale(1.06); }
 /* Hover area: the link minus a strip on its right, so it reacts a little
  * later as the pointer comes in from that side. */
-.more::after { content: ""; position: absolute; inset: 0 12% 0 0; pointer-events: auto; }
+.more::after { content: ""; position: absolute; inset: 0 25% 0 0; pointer-events: auto; }
 .more-arrows { display: inline-flex; margin-left: 4px; }
 .more-arrow { display: inline-block; transition: transform .3s ease-in-out; }
 .more:hover .more-arrow, .more:focus-visible .more-arrow { transform: translateX(5px); }
