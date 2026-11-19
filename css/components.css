@@ -63,12 +63,14 @@
   text-transform: uppercase;
   color: var(--gold-ink);
   display: inline-block;
+  position: relative;
+  margin-right: 1.6em; /* room for the arrows, which sit outside the box */
   transform-origin: left center;
   transition: letter-spacing .3s ease-in-out, transform .3s ease-in-out, color .25s ease;
 }
 .more:hover, .more:focus-visible { letter-spacing: 0.14em; transform: scale(1.06); }
 /* Arrows sit outside the hit area, so the link only reacts over its text. */
-.more-arrows { display: inline-flex; margin-left: 4px; pointer-events: none; }
+.more-arrows { position: absolute; left: 100%; top: 0; display: inline-flex; margin-left: 4px; pointer-events: none; }
 .more-arrow { display: inline-block; transition: transform .3s ease-in-out; }
 .more-arrow:first-child { transition-delay: 40ms; }
 .more:hover .more-arrow, .more:focus-visible .more-arrow { transform: translateX(5px); }
