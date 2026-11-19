@@ -37,7 +37,7 @@ img, svg { display: block; }
 .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
 .eyebrow {
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
