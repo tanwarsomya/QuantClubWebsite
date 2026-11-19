@@ -63,7 +63,12 @@
   text-transform: uppercase;
   color: var(--gold-ink);
 }
-.more:hover { text-decoration: underline; }
+.more-arrow { display: inline-block; margin-left: 2px; }
+.more.is-shuffling .more-arrow { animation: more-shuffle .7s ease-in-out infinite; }
+@keyframes more-shuffle {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
 .dark .more { color: var(--gold); }
 
 /* Footer */
