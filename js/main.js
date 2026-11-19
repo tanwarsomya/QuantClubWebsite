@@ -18,22 +18,40 @@
   if (year) year.textContent = new Date().getFullYear();
 })();
 
-/* "Read more >>" links: the arrows shuffle while hovered. On leave, the current cycle finishes before stopping, so
- * quick mouse movements never make the arrows jump back. */
+/* "Read more >>" links: while the link is hovered (or keyboard-focused), each
+ * arrow shuffles on its own, the left one starting a moment after the right.
+ * On leave, each arrow finishes its current cycle before stopping, so quick
+ * mouse movements never make the arrows jump back. */
 (function () {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const LAG = 110; // ms the left arrow trails the right one
   document.querySelectorAll(".more").forEach((link) => {
-    const arrow = link.querySelector(".more-arrow");
-    if (!arrow) return;
-    let stopping = false;
-    const start = () => { stopping = false; link.classList.add("is-shuffling"); };
-    const stop = () => { if (link.classList.contains("is-shuffling")) stopping = true; };
+    const arrows = [...link.querySelectorAll(".more-arrow")].reverse(); // right first
+    if (!arrows.length) return;
+    const state = arrows.map(() => ({ stopping: false, timer: 0 }));
+    function start() {
+      arrows.forEach((a, i) => {
+        const st = state[i];
+        st.stopping = false;
+        if (a.classList.contains("is-shuffling")) return;
+        clearTimeout(st.timer);
+        st.timer = setTimeout(() => a.classList.add("is-shuffling"), i * LAG);
+      });
+    }
+    function stop() {
+      arrows.forEach((a, i) => {
+        clearTimeout(state[i].timer);
+        if (a.classList.contains("is-shuffling")) state[i].stopping = true;
+      });
+    }
+    arrows.forEach((a, i) =>
+      a.addEventListener("animationiteration", () => {
+        if (state[i].stopping) { a.classList.remove("is-shuffling"); state[i].stopping = false; }
+      })
+    );
     link.addEventListener("pointerenter", start);
     link.addEventListener("pointerleave", stop);
-    link.addEventListener("focus", start);
+    link.addEventListener("focus", () => { if (link.matches(":focus-visible")) start(); });
     link.addEventListener("blur", stop);
-    arrow.addEventListener("animationiteration", () => {
-      if (stopping) { link.classList.remove("is-shuffling"); stopping = false; }
-    });
   });
 })();
