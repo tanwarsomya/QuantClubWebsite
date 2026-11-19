@@ -73,12 +73,8 @@
  * later as the pointer comes in from that side. */
 .more::after { content: ""; position: absolute; inset: 0 12% 0 0; pointer-events: auto; }
 .more-arrows { display: inline-flex; margin-left: 4px; }
-/* Right arrow leads on hover; left arrow leads on the way back. */
 .more-arrow { display: inline-block; transition: transform .3s ease-in-out; }
-.more-arrow:last-child { transition-delay: 80ms; }
 .more:hover .more-arrow, .more:focus-visible .more-arrow { transform: translateX(5px); }
-.more:hover .more-arrow:first-child, .more:focus-visible .more-arrow:first-child { transition-delay: 80ms; }
-.more:hover .more-arrow:last-child, .more:focus-visible .more-arrow:last-child { transition-delay: 0ms; }
 .dark .more { color: var(--gold); }
 
 /* Footer */
