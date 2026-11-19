@@ -1,84 +1,19 @@
-/* =========================================================
-   main.js — page behaviour, loaded by every page after visuals.js
-   - Darkens the nav once the page is scrolled
-   - Fills in the footer year
-   - Mounts a visual on every [data-team] element and plays it
-     only while hovered, focused or tapped
-   ========================================================= */
-(() => {
-  // ---------- Setup ----------
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // ---------- Nav: darken on scroll ----------
+/* Nav toggle on small screens and footer year. Loaded by every page. */
+(function () {
   const nav = document.querySelector(".nav");
-  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 20);
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  // ---------- Mount a visual on each [data-team] element ----------
-  const makers = window.TeamVisuals;
-  const WARMUP_FRAMES = 160;
-  const scenes = [];
-
-  document.querySelectorAll("[data-team]").forEach((el) => {
-    const canvas = el.querySelector("canvas");
-    const ctx = canvas.getContext("2d");
-    const scene = { el, canvas, ctx, draw: null, playing: false };
-    const setup = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const { width, height } = canvas.getBoundingClientRect();
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      // Free space above the column text, so the visual never sits behind it
-      const copy = el.querySelector(".team-copy");
-      const space = copy ? copy.getBoundingClientRect().top - canvas.getBoundingClientRect().top : height;
-      scene.draw = makers[el.dataset.team](ctx, width, height, canvas.dataset.fit, space);
-      // Run ahead so the still frame shows a fully formed visual
-      for (let i = 0; i < WARMUP_FRAMES; i++) scene.draw();
-    };
-    scene.setup = setup;
-    setup();
-    scenes.push(scene);
-  });
-
-  // ---------- Animation loop ----------
-  // Columns show a still frame and only animate while hovered (or tapped on touch screens).
-  // The loop stops entirely when nothing is playing.
-  let rafId = null;
-  const loop = () => {
-    const active = scenes.filter((s) => s.playing);
-    active.forEach((s) => s.draw());
-    rafId = active.length ? requestAnimationFrame(loop) : null;
-  };
-  const setPlaying = (scene, on) => {
-    if (reduceMotion) return;
-    scene.playing = on;
-    scene.el.classList.toggle("is-playing", on);
-    if (on && rafId === null) rafId = requestAnimationFrame(loop);
-  };
-
-  // Decide per event, not per device: touchscreen laptops report "no hover"
-  // even when a mouse is being used.
-  for (const s of scenes) {
-    // Mouse or pen: play while the pointer is over the element
-    s.el.addEventListener("pointerenter", (e) => { if (e.pointerType !== "touch") setPlaying(s, true); });
-    s.el.addEventListener("pointerleave", (e) => { if (e.pointerType !== "touch") setPlaying(s, false); });
-    // Touch: tapping plays this one and pauses the others; tapping a link just follows it
-    s.el.addEventListener("pointerup", (e) => {
-      if (e.pointerType !== "touch" || e.target.closest("a")) return;
-      const on = !s.playing;
-      scenes.forEach((x) => setPlaying(x, x === s && on));
+  const toggle = document.querySelector(".nav-toggle");
+  if (nav && toggle) {
+    toggle.addEventListener("click", () => {
+      const open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(open));
     });
-    // Keyboard users get the animation when tabbing to the apply link
-    s.el.addEventListener("focusin", () => setPlaying(s, true));
-    s.el.addEventListener("focusout", () => setPlaying(s, false));
+    nav.querySelectorAll(".nav-links a").forEach((a) =>
+      a.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      })
+    );
   }
-
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => scenes.forEach((s) => s.setup()), 150);
-  });
+  const year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
 })();
