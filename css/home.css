@@ -56,8 +56,24 @@ section.figures { padding: 36px 0; border-bottom: 1px solid var(--line-light); }
 .partner p:last-child { font-size: 0.9rem; }
 
 /* Approach */
-.approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
-.approach-grid article { padding-top: 24px; border-top: 1px solid var(--line-dark); }
+section.approach { padding: 120px 0 140px; }
+.approach-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-areas: "why bell how" "what bell .";
+  column-gap: 56px;
+  row-gap: 140px;
+  align-items: start;
+  margin-top: 64px;
+}
+.ap-why { grid-area: why; }
+.ap-how { grid-area: how; margin-top: 140px; }
+.ap-what { grid-area: what; }
+.approach-bell { grid-area: bell; align-self: center; position: relative; z-index: 1; }
+.approach-bell svg { width: 100%; height: auto; }
+.approach-links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.approach-grid article { position: relative; z-index: 1; padding-top: 24px; border-top: 1px solid var(--line-dark); }
 .approach-grid h2 { margin: 16px 0 14px; font-size: 1.4rem; max-width: 18ch; }
 .approach-grid p:last-child { color: var(--slate); font-size: 0.92rem; }
 
@@ -102,6 +118,11 @@ section.figures { padding: 36px 0; border-bottom: 1px solid var(--line-light); }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { justify-self: center; width: min(100%, 480px); }
   .approach-grid, .about-grid, .news-grid { grid-template-columns: 1fr; gap: 40px; }
+  .approach-grid { grid-template-areas: "bell" "why" "how" "what"; }
+  .ap-how { margin-top: 0; }
+  .approach-bell { width: min(100%, 520px); justify-self: center; }
+  .approach-links { display: none; }
+  section.approach { padding: 72px 0; }
   .team-grid { grid-template-columns: 1fr 1fr; }
   section.light, section.approach { padding: 72px 0; }
 }
