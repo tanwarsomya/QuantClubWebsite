@@ -24,10 +24,10 @@ Website redesign for the Stockholm Student Quantitative Fund (SSQF, KTH). One de
 - Work only on branch `landing-page` for this phase. Check with `git branch` first.
 - **Never** commit to, merge into or push to `main` — every push to main goes live via GitHub Pages.
 - Never commit directly to `redesign`. Flow: `landing-page` → PR into `redesign` → (when the whole redesign is done) `redesign` → `main`.
-- **Only commit when the user explicitly says so.** Then use small, logical commits with clear imperative messages.
+- **Commit after every 2-3 change requests** (not after each tiny tweak), with clear imperative messages.
 - Don't push until the user says so. On approval: push `landing-page` and open a PR with base `redesign` (not main).
 - Don't commit the design document unless asked.
 
 ## How to work
-- Implement step by step (no commits unless told) and tell the user what to check in the browser after each larger change.
+- Implement step by step (commit every 2-3 changes) and tell the user what to check in the browser after each larger change.
 - If something in the design is unclear or conflicts, make a sensible choice and flag it.
