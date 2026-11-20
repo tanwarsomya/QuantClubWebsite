@@ -7,10 +7,14 @@
   <meta name="description" content="Stockholm Student Quantitative Fund: student-led quantitative finance at KTH. Bridging the gap between academic theory and systematic investing.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/home.css">
+  <script>
+    /* Hide reveal targets before first paint; js/reveal.js shows them as they scroll in. */
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("js-reveal");
+  </script>
   <link rel="icon" href="assets/favicon.png" type="image/png">
 </head>
 <body id="top">
@@ -21,7 +25,7 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="#teams">About</a></li>
         <li><a href="#approach">Our Approach</a></li>
         <li><a href="#teams">Teams</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -31,26 +35,28 @@
   </header>
 
   <main>
-    <!-- Hero -->
+    <!-- Hero: rotatable 3D surface on desktop, the circle mark on mobile -->
     <section class="hero dark" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Stockholm &middot; Run by KTH students</p>
-          <h1 id="hero-title" class="hero-title">Where<br>Mathematics<br><span>Meets Markets.</span></h1>
-          <p class="hero-lead">Bridging the gap between academic theory and systematic investing.</p>
-          <div class="hero-actions">
-            <a class="btn btn-gold" href="#">Become a Member <span class="arrow" aria-hidden="true">↗</span></a>
-            <a class="btn btn-line" href="#approach">Explore Our Work <span class="arrow" aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div data-hero-wave></div>
-          <p class="hero-index">SSQF / 01</p>
+      <div class="hero-3d" data-surface aria-hidden="true">
+        <span class="chip" data-chip="sigma">σ = 0.342 &nbsp; ∂σ/∂K = −0.08</span>
+        <span class="chip" data-chip="t">t + 1</span>
+        <span class="chip" data-chip="p">P(event) → 0.71</span>
+        <span class="peak-ring" data-chip="ring"></span>
+      </div>
+      <div class="container hero-inner">
+        <p class="eyebrow"><span class="diamond" aria-hidden="true">◆</span> Stockholm Student Quantitative Fund / KTH</p>
+        <h1 id="hero-title" class="hero-title">Where mathematics meets markets.</h1>
+        <div class="hero-mobile-mark" data-hero-wave aria-hidden="true"></div>
+        <p class="hero-lead">A student-run fund turning probability, code and capital into systematic strategies.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#">Become a Member <span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="btn btn-ghost" href="#approach">Explore the research <span class="arrow" aria-hidden="true">↗</span></a>
         </div>
       </div>
       <div class="container hero-bar">
-        <p>Mathematics / Programming / Finance</p>
-        <a href="#figures">Discover SSQF <span aria-hidden="true">↓</span></a>
+        <p class="hero-drag"><span aria-hidden="true">◎</span> Hover to move the surface</p>
+        <p class="hero-axes">X: Strike &nbsp;&nbsp; Y: Maturity &nbsp;&nbsp; Z: Implied vol</p>
+        <a href="#figures">Scroll <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
@@ -91,70 +97,82 @@
       </div>
     </section>
 
-    <!-- Mission: Why / How / What -->
+    <!-- Approach: the pipeline every idea runs through -->
     <section id="approach" class="approach dark" aria-labelledby="approach-title">
       <div class="container">
-        <p id="approach-title" class="eyebrow">Our Approach</p>
-        <div class="approach-grid">
-          <div class="approach-bell" data-bell></div>
-          <article class="ap-why">
-            <p class="eyebrow">01 / Why</p>
-            <h2>Bridging the gap between theory and practice.</h2>
-            <p>We believe students should have the opportunity to explore quantitative finance beyond the classroom and turn academic knowledge into practical experience.</p>
+        <p class="eyebrow">01 — How we work</p>
+        <h2 id="approach-title" class="approach-title">Every idea runs<br>the same pipeline.</h2>
+        <div class="pipeline" data-pipeline>
+          <article class="step step-1">
+            <p class="step-no">01</p>
+            <h3>Research</h3>
+            <p>Hypotheses from papers, data and market structure.</p>
           </article>
-          <article class="ap-how">
-            <p class="eyebrow">02 / How</p>
-            <h2>Learning through collaboration and innovation.</h2>
-            <p>By bringing together students with an interest in mathematics, programming and financial markets to exchange ideas, develop skills and work on quantitative projects.</p>
+          <article class="step step-2">
+            <p class="step-no">02</p>
+            <h3>Develop</h3>
+            <p>Production-grade code, data pipelines and models.</p>
           </article>
-          <article class="ap-what">
-            <p class="eyebrow">03 / What</p>
-            <h2>Research. Develop. Test.</h2>
-            <p>We explore quantitative finance through financial modelling, academic research, programming and the development and backtesting of systematic investment strategies.</p>
+          <article class="step step-3">
+            <p class="step-no">03</p>
+            <h3>Test</h3>
+            <p>Backtests, risk limits and paper trading before capital.</p>
           </article>
+          <div class="pipeline-line" aria-hidden="true">
+            <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <path d="M0.0 50.0L12.5 43.4L25.0 37.0L37.5 30.9L50.0 25.3L62.5 20.3L75.0 16.0L87.5 12.6L100.0 10.1L112.5 8.5L125.0 8.0L137.5 8.5L150.0 10.1L162.5 12.6L175.0 16.0L187.5 20.3L200.0 25.3L212.5 30.9L225.0 37.0L237.5 43.4L250.0 50.0L262.5 56.6L275.0 63.0L287.5 69.1L300.0 74.7L312.5 79.7L325.0 84.0L337.5 87.4L350.0 89.9L362.5 91.5L375.0 92.0L387.5 91.5L400.0 89.9L412.5 87.4L425.0 84.0L437.5 79.7L450.0 74.7L462.5 69.1L475.0 63.0L487.5 56.6L500.0 50.0L512.5 43.4L525.0 37.0L537.5 30.9L550.0 25.3L562.5 20.3L575.0 16.0L587.5 12.6L600.0 10.1L612.5 8.5L625.0 8.0L637.5 8.5L650.0 10.1L662.5 12.6L675.0 16.0L687.5 20.3L700.0 25.3L712.5 30.9L725.0 37.0L737.5 43.4L750.0 50.0L762.5 56.6L775.0 63.0L787.5 69.1L800.0 74.7L812.5 79.7L825.0 84.0L837.5 87.4L850.0 89.9L862.5 91.5L875.0 92.0L887.5 91.5L900.0 89.9L912.5 87.4L925.0 84.0L937.5 79.7L950.0 74.7L962.5 69.1L975.0 63.0L987.5 56.6L1000.0 50.0" />
+            </svg>
+            <span class="node" style="left:0"></span>
+            <span class="node" style="left:50%"></span>
+            <span class="node" style="left:100%"></span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="about light" aria-labelledby="about-title">
-      <div class="container about-grid">
-        <div>
-          <p class="eyebrow">About us</p>
-          <h2 id="about-title" class="section-title">Three teams. One fund.</h2>
-        </div>
-        <div>
-          <p>Stockholm Student Quantitative Fund is run by students of KTH who apply mathematics, statistics and software to real markets. Research &amp; Trading develops, backtests and executes strategies, Development builds the systems that run them, and Marketing &amp; Sales connects the fund with students, partners and sponsors. The Board leads the fund and sets its direction.</p>
-          <a class="more" href="#">Learn more <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Teams -->
-    <section id="teams" class="teams light alt" aria-labelledby="teams-title">
-      <div class="container">
-        <p class="eyebrow">Our teams</p>
-        <h2 id="teams-title" class="section-title">Where you can contribute</h2>
+    <!-- Teams: three teams and the board, over an orbit background -->
+    <section id="teams" class="teams dark" aria-labelledby="teams-title">
+      <svg class="orbits" viewBox="0 0 1200 840" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g class="orbit-spin"><g transform="rotate(-8 600 420)" fill="none" stroke-width="1" data-orbits><ellipse cx="600" cy="420" rx="180" ry="76" stroke="var(--gold)" /><ellipse cx="600" cy="420" rx="300" ry="126" stroke="var(--slate)" /><ellipse cx="600" cy="420" rx="420" ry="176" stroke="var(--gold)" /><ellipse cx="600" cy="420" rx="540" ry="227" stroke="var(--slate)" /><ellipse cx="600" cy="420" rx="680" ry="286" stroke="var(--gold)" /></g></g>
+        <circle class="orbit-sun" cx="600" cy="420" r="7" />
+      </svg>
+      <div class="container teams-inner">
         <div class="team-grid">
+          <div class="teams-center">
+            <p class="eyebrow">02 — Where you can contribute</p>
+            <h2 id="teams-title" class="teams-title">Three teams.<br>One fund.</h2>
+          </div>
           <article class="team-card">
-            <h3>Research &amp; Trading</h3>
-            <p>Writing papers, developing mathematical models, and backtesting and executing our strategies.</p>
-            <a class="more" href="#">Meet the team <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
+            <div class="team-portrait" aria-hidden="true"><span>Team lead<br>portrait</span></div>
+            <div class="team-body">
+              <h3>Research &amp; Trading</h3>
+              <p>Writing papers, developing mathematical models, and backtesting and executing our strategies.</p>
+              <a class="more" href="#">Meet the team <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
+            </div>
           </article>
           <article class="team-card">
-            <h3>Development</h3>
-            <p>Building the infrastructure, data pipelines and tooling behind the fund.</p>
-            <a class="more" href="#">Meet the team <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
-          </article>
-          <article class="team-card team-card-hiring">
-            <h3>Marketing &amp; Sales</h3>
-            <p>Telling our story, running events and bringing in partners. Now hiring.</p>
-            <a class="more" href="#">Apply now <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
+            <div class="team-portrait" aria-hidden="true"><span>Team lead<br>portrait</span></div>
+            <div class="team-body">
+              <h3>Development</h3>
+              <p>Building the infrastructure, data pipelines and tooling behind the fund.</p>
+              <a class="more" href="#">Meet the team <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
+            </div>
           </article>
           <article class="team-card">
-            <h3>Board</h3>
-            <p>Leading the fund, setting its direction and coordinating the teams.</p>
-            <a class="more" href="#">Meet the board <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
+            <div class="team-portrait" aria-hidden="true"><span>Team lead<br>portrait</span></div>
+            <div class="team-body">
+              <h3>Marketing &amp; Sales</h3>
+              <p>Telling our story, running events and bringing in partners. Now hiring.</p>
+              <a class="more" href="#">Apply now <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
+            </div>
+          </article>
+          <article class="team-card">
+            <div class="team-portrait" aria-hidden="true"><span>Team lead<br>portrait</span></div>
+            <div class="team-body">
+              <h3>Board</h3>
+              <p>Leading the fund, setting its direction and coordinating the teams.</p>
+              <a class="more" href="#">Meet the board <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a>
+            </div>
           </article>
         </div>
       </div>
@@ -164,7 +182,7 @@
     <section id="news" class="news light" aria-label="Open positions and events">
       <div class="container news-grid">
         <div>
-          <p class="eyebrow">Jobs</p>
+          <p class="eyebrow">03 — Jobs</p>
           <h2 class="section-title">Open positions</h2>
           <ul class="list">
             <li><time>[DATUM]</time><strong>Marketing &amp; Sales Associate</strong><a class="more" href="#">Read more <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a></li>
@@ -173,7 +191,7 @@
           </ul>
         </div>
         <div>
-          <p class="eyebrow">Events</p>
+          <p class="eyebrow">03 — Events</p>
           <h2 class="section-title">Upcoming and recent</h2>
           <ul class="list">
             <li><time>[DATUM]</time><strong>[Event med partner]</strong><a class="more" href="#">Read more <span class="more-arrows" aria-hidden="true"><span class="more-arrow">&gt;</span><span class="more-arrow">&gt;</span></span></a></li>
@@ -203,7 +221,6 @@
         <div>
           <h3>Fund</h3>
           <ul>
-            <li><a href="#about">About</a></li>
             <li><a href="#approach">Our Approach</a></li>
             <li><a href="#teams">Teams</a></li>
             <li><a href="#partners">Partners</a></li>
@@ -219,7 +236,9 @@
   </footer>
 
   <script src="js/logo.js"></script>
-  <script src="js/approach.js"></script>
+  <script type="module" src="js/surface.js"></script>
+  <script src="js/orbits.js"></script>
+  <script src="js/reveal.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

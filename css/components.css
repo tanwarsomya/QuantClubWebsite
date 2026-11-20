@@ -47,6 +47,8 @@
 .btn-outline:hover { background: var(--gold); color: var(--navy); }
 .btn-navy { background: var(--navy); color: var(--cream); }
 .btn-navy:hover { background: var(--navy-2); color: var(--gold); }
+.btn-ghost { border-color: rgba(246, 242, 233, 0.6); color: var(--cream); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 .btn-line {
   padding: 14px 0 10px;
   color: var(--cream);

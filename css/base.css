@@ -12,6 +12,7 @@
   --line-light: rgba(11, 22, 43, 0.14);
 
   --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
   --max: 1320px;
   --gutter: 32px;
 }
@@ -37,9 +38,8 @@ img, svg { display: block; }
 .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
 .eyebrow {
-  font-size: 0.86rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  font: 500 0.78rem/1.4 var(--mono);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold);
 }
@@ -47,6 +47,22 @@ img, svg { display: block; }
 
 @media (max-width: 640px) {
   :root { --gutter: 16px; }
+}
+
+/* Scroll reveal: an inline script in <head> adds .js-reveal to <html>; js/reveal.js
+ * adds .is-visible the first time each element enters the viewport.
+ * Keep this selector list in sync with TARGETS in js/reveal.js. */
+.js-reveal :is(.hero-inner > *, .hero-bar, section .eyebrow, .section-title, .approach-title, .step, .figures-grid > div, .partner, .team-card, .teams-title, .list li, .partners .btn) {
+  opacity: 0;
+}
+.js-reveal :is(.hero-inner > *, .hero-bar, section .eyebrow, .section-title, .approach-title, .step, .figures-grid > div, .partner, .team-card, .teams-title, .list li, .partners .btn).is-visible {
+  /* An animation, not a transition, so it never overrides an element's own hover transitions. */
+  animation: reveal-in .8s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0s) both;
+}
+@keyframes reveal-in {
+  /* `translate`, not `transform`, so hover transforms (e.g. team cards) still apply. */
+  from { opacity: 0; translate: 0 18px; }
+  to { opacity: 1; translate: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
